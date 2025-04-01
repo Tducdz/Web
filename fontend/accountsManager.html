@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý tài khoản</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/admin.css" />
+    <link rel="stylesheet" href="assets/css/accountManager.css" />
+
+    <script
+      src="https://kit.fontawesome.com/8373f8f77a.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <a class="logo" href="/Lap Trinh Web/fontend/index.html"
+        ><h1>TDucShop</h1></a
+      >
+      <h2>Trang Quản Trị</h2>
+    </header>
+    <main>
+      <div class="nav-bar">
+        <ul>
+          <li class="nav-list"><a href="adminHome.html">Tổng quan</a></li>
+          <a href="javascript:void(0);" id="toggleLink"
+            >Quản lý sản phẩm
+            <i class="fa-solid fa-angle-down fa-xs angle-down"></i
+          ></a>
+          <ul id="productOptions" class="hidden">
+            <li class="lv2-list">
+              <a href="productRemove.html">Sửa, xóa sản phẩm</a>
+            </li>
+            <li class="lv2-list">
+              <a href="productAdd.html">Thêm sản phẩm</a>
+            </li>
+          </ul>
+          <li class="nav-list qltk">
+            <a href="accountsManager.html">Quản lý tài khoản</a>
+          </li>
+          <li class="nav-list">
+            <a href="ordersManager.html">Quản lý đơn hàng</a>
+          </li>
+          <li class="nav-list">
+            <a href="index.html">Đăng xuất</a>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <h3>Danh sách tài khoản:</h3>
+        <p class="search-account-text">Tìm tài khoản</p>
+        <input type="text" placeholder="Nhập ID tài khoản" />
+        <button class="search-account-button">Tìm</button>
+        <table id="userTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tên tài khoản</th>
+              <th>Email</th>
+              <th>Vai trò</th>
+              <th>Trạng thái</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Dữ liệu thêm bằng JS -->
+          </tbody>
+        </table>
+      </div>
+      <div id="editPopup" class="popup">
+        <div class="popup-content">
+          <h3 style="font-size: 16px">Chỉnh sửa tài khoản</h3>
+          <label>Tên tài khoản:</label>
+          <input type="text" id="editName" maxlength="25" />
+
+          <label>Email:</label>
+          <input type="email" id="editEmail" maxlength="40" />
+
+          <label>Vai trò:</label>
+          <select id="editRole">
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+          </select>
+
+          <label>Trạng thái:</label>
+          <select id="editStatus">
+            <option value="Hoạt động">Hoạt động</option>
+            <option value="Bị khóa">Bị khóa</option>
+          </select>
+
+          <button onclick="saveChanges()">Lưu</button>
+          <button onclick="closePopup()">Đóng</button>
+        </div>
+      </div>
+    </main>
+    <script src="assets/javascript/hide-show.js"></script>
+    <script src="assets/javascript/user-table.js"></script>
+  </body>
+</html>

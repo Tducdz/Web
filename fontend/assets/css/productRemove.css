@@ -1,0 +1,153 @@
+.lv2-list:first-child {
+  background-color: #fff;
+}
+
+.lv2-list:first-child a {
+  color: #000;
+}
+
+button {
+  cursor: pointer;
+  width: 120px;
+  height: 32px;
+}
+
+.content {
+  margin-top: 32px;
+  margin-left: 32px;
+  width: 100%;
+  font-size: 16px;
+}
+
+/* ================ Table ================= */
+
+.content .product-list {
+  width: 95%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+#prd-0001 {
+  cursor: pointer;
+}
+
+.product-list td,
+.product-list th {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.product-list th {
+  background-color: #f2f2f2;
+}
+
+.product-list tbody {
+  text-align: center;
+}
+
+.col-1 {
+  width: 10%;
+}
+
+.col-2 {
+  width: 15%;
+}
+
+.col-3 {
+  width: 30%;
+}
+
+.col-4 {
+  width: 20%;
+}
+
+.col-5 {
+  width: 15%;
+}
+
+.col-6 {
+  width: 10%;
+}
+
+/* ================ PopUp ================= */
+
+#pop-up {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.product-information {
+  position: absolute;
+  width: 75%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 24px 0 24px 24px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.product-information .title-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-content i {
+  cursor: pointer;
+  margin-right: 24px;
+}
+
+.product-information .edit-text {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #d7000e;
+}
+
+.content-main {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 30px;
+}
+
+input {
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+.content-main .edit-product {
+  grid-column: 1 / 3;
+  justify-self: center;
+}
+
+.content-main .delete-product {
+  grid-column: 3 / 5;
+  justify-self: center;
+}
+
+.content-main .custom-file-label {
+  cursor: pointer;
+  display: inline-block;
+  background-color: #efefef;
+  font-size: 14px;
+  padding: 4px 8px;
+  margin-top: 8px;
+  border: 1px solid;
+}
+
+.content-main .custom-file-label:hover {
+  background-color: #ccc;
+}
+
+#fileName {
+  display: inline-block;
+  font-size: 14px;
+}

@@ -1,0 +1,40 @@
+.lv2-list:nth-of-type(2) {
+  background-color: #fff;
+}
+
+.lv2-list:nth-of-type(2) a {
+  color: #000;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 20px;
+  margin-top: 32px;
+  margin-left: 32px;
+  width: 100%;
+  font-size: 16px;
+}
+
+.content input {
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+.content .custom-file-label {
+  cursor: pointer;
+  display: inline-block;
+  background-color: rgb(200, 200, 200);
+  font-size: 14px;
+  padding: 4px 8px;
+  margin-top: 8px;
+  border: 1px solid;
+}
+
+.content .confirm-button {
+  cursor: pointer;
+  width: 100px;
+  height: 32px;
+}

@@ -1,0 +1,25 @@
+{
+  "name": "study",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "watch": "sass --watch src/resources/scss/app.scss:src/public/css/app.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@babel/runtime": "^7.27.0",
+    "core-js": "^3.41.0",
+    "express": "^4.21.2",
+    "express-handlebars": "^8.0.1"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-twig-melody": "^0.4.6",
+    "sass": "^1.86.0"
+  }
+}

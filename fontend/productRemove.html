@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý sản phẩm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/admin.css" />
+    <link rel="stylesheet" href="assets/css/productRemove.css" />
+
+    <script
+      src="https://kit.fontawesome.com/8373f8f77a.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <a class="logo" href="/Lap Trinh Web/fontend/index.html"
+        ><h1>TDucShop</h1></a
+      >
+      <h2>Trang Quản Trị</h2>
+    </header>
+    <main>
+      <div class="nav-bar">
+        <ul>
+          <li class="nav-list"><a href="adminHome.html">Tổng quan</a></li>
+          <a href="javascript:void(0);" id="toggleLink"
+            >Quản lý sản phẩm
+            <i class="fa-solid fa-angle-down fa-xs angle-down"></i
+          ></a>
+          <ul id="productOptions" class="">
+            <li class="lv2-list">
+              <a href="productRemove.html">Sửa, xóa sản phẩm</a>
+            </li>
+            <li class="lv2-list">
+              <a href="productAdd.html">Thêm sản phẩm</a>
+            </li>
+          </ul>
+          <li class="nav-list">
+            <a href="accountsManager.html">Quản lý tài khoản</a>
+          </li>
+          <li class="nav-list">
+            <a href="ordersManager.html">Quản lý đơn hàng</a>
+          </li>
+          <li class="nav-list">
+            <a href="index.html">Đăng xuất</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <p class="search-product-text">Tìm sản phẩm</p>
+        <input type="text" placeholder="ID/Thương hiệu/Tên" />
+        <button class="search-product-button">Tìm</button>
+        <table class="product-list">
+          <thead>
+            <tr>
+              <th class="col-1">ID</th>
+              <th class="col-2">Thương hiệu</th>
+              <th class="col-3">Tên sản phẩm</th>
+              <th class="col-4">Dung lượng bộ nhớ</th>
+              <th class="col-5">Giá bán</th>
+              <th class="col-6">Kho</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="prd-0001">
+              <td>0001</td>
+              <td>Apple</td>
+              <td>Iphone 16 Pro Max</td>
+              <td>512GB</td>
+              <td>30.990.000</td>
+              <td>2310</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="pop-up">
+        <div class="product-information">
+          <div class="title-content">
+            <p class="edit-text">Chi tiết sản phẩm:</p>
+            <i id="close-popup" class="fa-solid fa-xmark fa-2xl"></i>
+          </div>
+          <img
+            src="assets/img/iphone-16-pro-max.png"
+            style="width: 60px; margin-bottom: 4px"
+            alt=""
+          />
+          <div class="content-main">
+            <div class="phone-name">
+              <p>Tên sản phẩm</p>
+              <input
+                type="text"
+                value="Iphone 16 Pro Max"
+                placeholder="Nhập tên sản phẩm"
+              />
+            </div>
+            <div class="phone-listed-price">
+              <p>Giá niêm yết</p>
+              <input type="text" value="34.990.000" placeholder="Nhập giá" />
+            </div>
+            <div class="phone-price">
+              <p>Giá bán</p>
+              <input type="text" value="30.990.000" placeholder="Nhập giá" />
+            </div>
+            <div class="brand">
+              <p>Thương hiệu</p>
+              <input type="text" value="Apple" placeholder="Nhập tên" />
+            </div>
+            <div class="size-phone">
+              <p>Kích thước màn hình</p>
+              <input type="text" value="6.9" placeholder="Nhập kích thước" />
+            </div>
+            <div class="technology-display">
+              <p>Công nghệ màn hình</p>
+              <input
+                type="text"
+                value="Super Retina XDR OLED"
+                placeholder="Nhập loại màn hình"
+              />
+            </div>
+            <div class="chipset">
+              <p>Chipset</p>
+              <input
+                type="text"
+                value="Apple A18 Pro"
+                placeholder="Nhập chipset"
+              />
+            </div>
+            <div class="nfc">
+              <p>Hỗ trợ NFC</p>
+              <!-- <input type="text" value="có" placeholder="Có hỗ trợ NFC không?" /> -->
+              <select
+                id="mySelect"
+                style="margin-top: 8px; padding: 4px; border: 1px solid"
+              >
+                <option value="yes">Có</option>
+                <option value="no">Không</option>
+              </select>
+            </div>
+            <div class="ram">
+              <p>Dung lượng RAM</p>
+              <input type="text" value="8" placeholder="Nhập dung lượng" />
+            </div>
+            <div class="rom">
+              <p>Dung lượng ROM</p>
+              <input type="text" value="512" placeholder="Nhập bộ nhớ trong" />
+            </div>
+            <div class="battery">
+              <p>Dung lượng Pin</p>
+              <input
+                type="text"
+                value="4.676"
+                placeholder="Nhập dung lượng Pin"
+              />
+            </div>
+            <div class="sim">
+              <p>Số SIM</p>
+              <input type="text" value="2" placeholder="Số SIM hỗ trợ" />
+            </div>
+            <div class="system">
+              <p>Hệ điều hành</p>
+              <input
+                type="text"
+                value="IOS 18"
+                placeholder="Nhập hệ điều hành"
+              />
+            </div>
+            <div class="resistant-water">
+              <p>Kháng nước</p>
+              <input type="text" value="IP68" placeholder="Chỉ số kháng nước" />
+            </div>
+            <div class="quantity">
+              <p>Số lượng</p>
+              <input
+                type="text"
+                value="2310"
+                placeholder="Nhập số lượng hàng"
+              />
+            </div>
+            <div class="phone-img">
+              <p>Ảnh sản phẩm</p>
+              <label for="fileUpload" class="custom-file-label">Chọn tệp</label>
+              <input type="file" id="fileUpload" style="display: none" />
+              <p id="fileName"></p>
+            </div>
+            <button class="edit-product">Xác nhận sửa</button>
+            <button class="delete-product">Xóa sản phẩm</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="assets/javascript/hide-show.js"></script>
+    <script src="assets/javascript/displayFile.js"></script>
+    <script src="assets/javascript/product-edit.js"></script>
+  </body>
+</html>

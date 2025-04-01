@@ -1,0 +1,83 @@
+.footer-container {
+  margin-top: 0 !important;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+}
+
+main {
+  display: flex;
+}
+
+main input {
+  padding: 4px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+.nav-bar a:first-of-type {
+  background-color: #999;
+  color: #000;
+}
+
+main .nav-bar {
+  display: flex;
+  flex-direction: column;
+  min-width: 240px;
+  min-height: calc(100vh - 208px);
+  background-color: #666;
+  font-size: 20px;
+  color: #fff;
+}
+
+.nav-bar h2 {
+  font-family: Poppins;
+  font-style: italic;
+  font-size: 24px;
+  font-weight: 600;
+  padding: 8px 0;
+  color: #fff;
+  text-decoration: underline;
+}
+
+.nav-bar a {
+  cursor: pointer;
+  padding: 16px 0;
+  padding-left: 16px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-bar a:hover {
+  background-color: #ccc;
+  color: #000;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 32px;
+  margin-left: 32px;
+  width: 100%;
+}
+
+.content h3 {
+  font-size: 20px;
+  padding-bottom: 16px;
+}
+
+.content p {
+  font-size: 16px;
+  padding: 8px 0;
+}
+
+.infor-button,
+.password-button {
+  display: block;
+  cursor: pointer;
+  margin-top: 12px;
+  padding: 4px 8px;
+}

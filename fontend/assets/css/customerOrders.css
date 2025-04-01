@@ -1,0 +1,107 @@
+.footer-container {
+  margin-top: 0 !important;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+}
+
+main {
+  display: flex;
+}
+
+.nav-bar li:nth-of-type(2) {
+  background-color: #999;
+  color: #000;
+}
+
+main .nav-bar {
+  display: flex;
+  flex-direction: column;
+  min-width: 240px;
+  min-height: calc(100vh - 208px);
+  background-color: #666;
+  font-size: 20px;
+  color: #fff;
+}
+
+.nav-bar h2 {
+  font-family: Poppins;
+  font-style: italic;
+  font-size: 24px;
+  font-weight: 600;
+  padding: 8px 0;
+  color: #fff;
+  text-decoration: underline;
+}
+
+.nav-bar a {
+  cursor: pointer;
+  padding: 16px 0;
+  padding-left: 16px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-bar a:hover {
+  background-color: #ccc;
+  color: #000;
+}
+
+.content {
+  margin-top: 32px;
+  margin-left: 32px;
+  width: 100%;
+}
+
+.content h3 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+table {
+  width: 95%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #555;
+  padding: 8px;
+  text-align: center;
+}
+th {
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+  width: 10%;
+} /* Mã đơn */
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 20%;
+} /* Ngày đặt */
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 20%;
+} /* Sản phẩm */
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 15%;
+} /* Số lượng */
+
+th:nth-child(5),
+td:nth-child(5) {
+  width: 15%;
+} /* Tổng tiền */
+
+th:nth-child(6),
+td:nth-child(6) {
+  width: 20%;
+} /* Trạng thái */

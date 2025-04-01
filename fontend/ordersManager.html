@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý đơn hàng</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/admin.css" />
+    <link rel="stylesheet" href="assets/css/ordersManager.css" />
+
+    <script
+      src="https://kit.fontawesome.com/8373f8f77a.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <a class="logo" href="/Lap Trinh Web/fontend/index.html"
+        ><h1>TDucShop</h1></a
+      >
+      <h2>Trang Quản Trị</h2>
+    </header>
+    <main>
+      <div class="nav-bar">
+        <ul>
+          <li class="nav-list"><a href="adminHome.html">Tổng quan</a></li>
+          <a href="javascript:void(0);" id="toggleLink"
+            >Quản lý sản phẩm
+            <i class="fa-solid fa-angle-down fa-xs angle-down"></i
+          ></a>
+          <ul id="productOptions" class="hidden">
+            <li class="lv2-list">
+              <a href="productRemove.html">Sửa, xóa sản phẩm</a>
+            </li>
+            <li class="lv2-list">
+              <a href="productAdd.html">Thêm sản phẩm</a>
+            </li>
+          </ul>
+          <li class="nav-list">
+            <a href="accountsManager.html">Quản lý tài khoản</a>
+          </li>
+          <li class="nav-list qldh">
+            <a href="ordersManager.html">Quản lý đơn hàng</a>
+          </li>
+          <li class="nav-list">
+            <a href="index.html">Đăng xuất</a>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <p class="heading">Danh sách đơn hàng:</p>
+        <p style="margin-top: 20px">Tìm kiếm đơn hàng:</p>
+        <input type="text" placeholder="Nhập ID đơn hàng" />
+        <button class="search-button">Tìm kiếm</button>
+        <table>
+          <thead>
+            <tr>
+              <th>Mã Đơn</th>
+              <th>Ngày Đặt</th>
+              <th>Khách Hàng</th>
+              <th>Sản Phẩm</th>
+              <th>Tổng Tiền</th>
+              <th>Trạng Thái</th>
+              <th>Hành Động</th>
+            </tr>
+          </thead>
+          <tbody id="orderTable">
+            <tr>
+              <td>0001</td>
+              <td>22/03/2025</td>
+              <td>Nguyễn Văn A</td>
+              <td>iPhone 15 Pro Max</td>
+              <td>32.000.000</td>
+              <td>Chờ xác nhận</td>
+              <td>
+                <button
+                  class="btn edit-btn"
+                  style="background-color: #4caf50; border: none"
+                >
+                  Sửa
+                </button>
+                <button
+                  class="btn delete-btn"
+                  style="background-color: #f44336; border: none"
+                >
+                  Xóa
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>0002</td>
+              <td>23/03/2025</td>
+              <td>Trần Thị B</td>
+              <td>Samsung Galaxy S24 Ultra</td>
+              <td>29.000.000</td>
+              <td>Đang giao</td>
+              <td>
+                <button
+                  class="btn edit-btn"
+                  style="background-color: #4caf50; border: none"
+                >
+                  Sửa
+                </button>
+                <button
+                  class="btn delete-btn"
+                  style="background-color: #f44336; border: none"
+                >
+                  Xóa
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="editModal" class="popup">
+        <div class="popup-content">
+          <h3 style="font-size: 16px">Chỉnh Sửa Đơn Hàng</h3>
+          <label>Tên khách hàng:</label>
+          <input type="text" id="editCustomer" placeholder="Tên khách hàng" />
+
+          <label>Sản phẩm</label>
+          <input type="text" id="editProduct" placeholder="Sản phẩm" />
+
+          <label>Tổng tiền</label>
+          <input type="text" id="editTotal" placeholder="Tổng tiền" />
+
+          <label>Trạng thái</label>
+          <select id="editStatus">
+            <option value="Chờ xác nhận">Chờ xác nhận</option>
+            <option value="Đang giao">Đang giao</option>
+            <option value="Đã hoàn thành">Đã hoàn thành</option>
+          </select>
+          <button id="saveEdit">Lưu</button>
+          <button id="closeEdit">Hủy</button>
+        </div>
+      </div>
+    </main>
+    <script src="assets/javascript/hide-show.js"></script>
+    <script src="assets/javascript/order-manager.js"></script>
+  </body>
+</html>

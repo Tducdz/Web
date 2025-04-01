@@ -1,0 +1,236 @@
+main {
+  margin: 20px 60px;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+}
+
+main h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* ================ Filter ================= */
+
+.filter {
+  display: flex;
+}
+
+.filter .choice {
+  position: relative;
+  width: 100px;
+  margin: 0 16px;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  outline: 1px solid #000;
+  outline-offset: 2px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.title-choice::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100px;
+  height: 20px;
+}
+
+.list-choice {
+  display: none;
+  position: absolute;
+  top: 26.5px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.title-choice:hover + .list-choice {
+  display: block;
+}
+
+.list-choice:hover {
+  display: block;
+}
+
+.list-choice li {
+  line-height: 28px;
+  border: 1px solid #ccc;
+}
+
+.list-choice li:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+.list-choice li:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+.list-choice li:hover {
+  background-color: #aaa;
+}
+
+/* ================ Product ================= */
+
+.products {
+  margin-top: 20px;
+}
+
+.item {
+  display: inline-block;
+  text-decoration: none;
+  margin-top: 16px;
+  color: black;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.item:hover {
+  border: 1px solid black;
+  transform: translateY(-3px);
+}
+
+.item img {
+  padding-top: 20px;
+  display: block;
+  margin: 0 auto;
+}
+
+.product-info {
+  padding: 12px 14px;
+}
+
+.item .product-name {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.item .feature {
+  display: flex;
+  margin-top: 12px;
+}
+
+.item .product-feature {
+  font-size: 12px;
+  display: inline-block;
+  padding: 2px 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+}
+
+.item .product-feature:nth-child(2) {
+  margin: 0 4px;
+}
+
+.item .price {
+  display: flex;
+  margin-top: 12px;
+}
+
+.item .price .price-current {
+  color: #d7000e;
+  font-weight: 700;
+}
+
+.item .price .price-old {
+  font-size: 10px;
+  text-decoration: line-through;
+  margin-left: 4px;
+  font-weight: 600;
+}
+
+/* ============== More Products =============== */
+
+.more-product {
+  display: block;
+  text-align: center;
+  margin-top: 28px;
+  cursor: pointer;
+}
+
+.more-product span {
+  display: inline-block;
+  padding: 10px 100px;
+  font-weight: 500;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.more-product span:hover {
+  transform: translateY(3px);
+}
+
+/* =============== Login =============== */
+
+.login {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 60px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.login-form h2 {
+  font-size: 28px;
+  font-weight: 500;
+  text-align: center;
+  padding-bottom: 16px;
+}
+
+.login-form label {
+  font-size: 16px;
+  color: #666;
+}
+
+.login-form input {
+  width: 260px;
+  height: 30px;
+  margin: 8px 0;
+}
+
+.login-form .help {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-form span {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #666;
+}
+
+.login-form button {
+  cursor: pointer;
+  width: 260px;
+  height: 48px;
+  border-radius: 999px;
+  background-color: #000;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 100;
+}
+
+.login-form button:first-of-type {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.register {
+  /* display: none; */
+}

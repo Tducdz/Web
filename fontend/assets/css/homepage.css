@@ -1,0 +1,154 @@
+main {
+  font-family: Inter, sans-serif;
+  margin: 20px 60px;
+  font-size: 14px;
+}
+
+/* ================== Banner =================== */
+
+main .banner {
+  display: block;
+}
+
+.banner img {
+  max-width: 900px;
+  height: auto;
+  display: block;
+  margin: auto;
+  border-radius: 12px;
+}
+
+/* ================== Content ==================== */
+
+.content {
+  margin-top: 20px;
+}
+
+.content .nav-extra {
+}
+
+.content .nav-text {
+  display: block;
+  font-size: 16px;
+}
+
+.content .list {
+  display: flex;
+  margin: 8px 0;
+}
+
+.content .list a {
+  display: block;
+  padding: 8px 12px;
+  margin: 0 8px;
+  border-radius: 8px;
+  color: black;
+  background-color: #e5e5e5;
+  text-decoration: none;
+}
+
+.content .list a:first-child {
+  margin-left: 0;
+}
+
+.content .list a:hover {
+  background-color: #f0f0f0;
+}
+
+.container .category {
+  margin: 12px 0;
+}
+
+.container .category .brand {
+  margin-bottom: 12px;
+  display: inline-block;
+  padding: 8px 52px;
+  border-radius: 999px;
+  background-color: #ffd5d5;
+}
+
+.container .item {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.container .item:hover {
+  border: 1px solid black;
+  transform: translateY(-3px);
+}
+
+.container .item img {
+  padding-top: 20px;
+  display: block;
+  margin: 0 auto;
+}
+
+.container .product-info {
+  padding: 12px 14px;
+}
+
+.item .product-name {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.item .feature {
+  display: flex;
+  margin-top: 12px;
+}
+
+.item .product-feature {
+  font-size: 12px;
+  display: inline-block;
+  padding: 2px 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+}
+
+.item .product-feature:nth-child(2) {
+  margin: 0 4px;
+}
+
+.item .price {
+  display: flex;
+  margin-top: 12px;
+}
+
+.item .price .price-current {
+  color: #d7000e;
+  font-weight: 700;
+}
+
+.item .price .price-old {
+  font-size: 10px;
+  text-decoration: line-through;
+  margin-left: 4px;
+  font-weight: 600;
+}
+
+.more-product {
+  display: block;
+  text-align: center;
+  margin-top: 28px;
+  cursor: pointer;
+}
+
+.more-product a {
+  display: inline-block;
+  padding: 10px 100px;
+  font-weight: 500;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid transparent;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.more-product a:hover {
+  transform: translateY(3px);
+}

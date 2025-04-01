@@ -1,0 +1,63 @@
+.nav-bar > ul > li:first-of-type {
+  background-color: #fff;
+}
+
+.nav-bar > ul > li:first-of-type a {
+  color: #000;
+}
+
+.content {
+  margin-top: 32px;
+  margin-left: 32px;
+  width: 100%;
+}
+
+.content p {
+  font-size: 20px;
+  padding-top: 12px;
+}
+
+table {
+  width: 95%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #555;
+  padding: 8px;
+  text-align: center;
+}
+th {
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+  width: 10%;
+} /* Mã đơn */
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 15%;
+} /* Ngày đặt */
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 20%;
+} /* Khách hàng */
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 30%;
+} /* Sản phẩm */
+
+th:nth-child(6),
+td:nth-child(6) {
+  width: 10%;
+} /* Tổng tiền */
+
+th:nth-child(7),
+td:nth-child(7) {
+  width: 20%;
+} /* Trạng thái */

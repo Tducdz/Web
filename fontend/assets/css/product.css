@@ -1,0 +1,192 @@
+main {
+  font-family: Inter, sans-serif;
+  margin: 20px 60px;
+  font-size: 14px;
+}
+
+.product {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product .product-img {
+}
+
+.product-img img {
+  width: 160px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  border: 2px solid #f00;
+}
+
+.table {
+  margin-top: 30px;
+  border-radius: 8px;
+  border: 2px solid orange;
+}
+
+.table h2 {
+  display: block;
+  line-height: 30px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  color: rgb(255, 0, 0);
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(to right, #fee8e9, #fad0c4);
+}
+
+.table p {
+  margin: 10px;
+  line-height: 24px;
+}
+
+.functions .button {
+  display: block;
+  padding: 20px 56px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+}
+
+.functions .button:hover {
+  transform: translateY(2px);
+  opacity: 0.8;
+}
+
+.red {
+  background-color: red;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.functions .product-information {
+  border-radius: 8px;
+  border: 2px solid orange;
+}
+
+.functions .product-information h2 {
+  color: red;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 28px;
+}
+
+.functions .product-information .information-form {
+  padding: 0px 20px 10px 20px;
+  line-height: 30px;
+}
+
+.extra .table:first-child {
+  margin-top: 0;
+}
+
+.comment {
+  display: block;
+}
+
+.comment h2 {
+  color: red;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.comment textarea {
+  margin: 20px 100px;
+  padding: 10px 20px;
+  width: 70vw;
+  height: 100px;
+}
+
+.comment button {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid #000;
+}
+
+.comment button:hover {
+  background-color: #ccc;
+  border-color: transparent;
+}
+
+/* ================ Login ================== */
+
+.login {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 60px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.login-form h2 {
+  font-size: 28px;
+  font-weight: 500;
+  text-align: center;
+  padding-bottom: 16px;
+}
+
+.login-form label {
+  font-size: 16px;
+  color: #666;
+}
+
+.login-form input {
+  width: 260px;
+  height: 30px;
+  margin: 8px 0;
+}
+
+.login-form .help {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-form span {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #666;
+}
+
+.login-form button {
+  cursor: pointer;
+  width: 260px;
+  height: 48px;
+  border-radius: 999px;
+  background-color: #000;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 100;
+}
+
+.login-form button:first-of-type {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.register {
+  /* display: none; */
+}
