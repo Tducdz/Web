@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quản lý tài khoản</title>
+    <title>Quản lý bình luận</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/admin.css" />
-    <link rel="stylesheet" href="assets/css/accountManager.css" />
+    <link rel="stylesheet" href="assets/css/commentsManager.css" />
 
     <script
       src="https://kit.fontawesome.com/8373f8f77a.js"
@@ -46,13 +46,13 @@
               <a href="productAdd.html">Thêm sản phẩm</a>
             </li>
           </ul>
-          <li class="nav-list qltk">
+          <li class="nav-list">
             <a href="accountsManager.html">Quản lý tài khoản</a>
           </li>
           <li class="nav-list">
             <a href="ordersManager.html">Quản lý đơn hàng</a>
           </li>
-          <li class="nav-list">
+          <li class="nav-list qlbl">
             <a href="commentsManager.html">Quản lý bình luận</a>
           </li>
           <li class="nav-list">
@@ -61,53 +61,66 @@
         </ul>
       </div>
       <div class="content">
-        <h3>Danh sách tài khoản:</h3>
-        <p class="search-account-text">Tìm tài khoản</p>
-        <input type="text" placeholder="Nhập ID tài khoản" />
-        <button class="search-account-button">Tìm kiếm</button>
-        <table id="userTable">
+        <p class="heading">Danh sách bình luận:</p>
+        <p style="margin-top: 20px">Tìm kiếm bình luận:</p>
+        <input type="text" placeholder="Nhập ID bình luận" />
+        <button class="search-button">Tìm kiếm</button>
+        <table>
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Tên tài khoản</th>
-              <th>Email</th>
-              <th>Vai trò</th>
-              <th>Trạng thái</th>
-              <th>Hành động</th>
+              <th>Mã</th>
+              <th>Ngày Đăng</th>
+              <th>Khách Hàng</th>
+              <th>Sản Phẩm</th>
+              <th>Nội Dung</th>
+              <th>Trạng Thái</th>
+              <th>Hành Động</th>
             </tr>
           </thead>
-          <tbody>
-            <!-- Dữ liệu thêm bằng JS -->
+          <tbody id="commentTable">
+            <tr>
+              <td>0001</td>
+              <td>22/03/2025</td>
+              <td>Nguyễn Văn A</td>
+              <td>iPhone 15 Pro Max</td>
+              <td>Sản phẩm rất tốt!</td>
+              <td>Chờ duyệt</td>
+              <td>
+                <button
+                  class="btn approve-btn"
+                  style="background-color: #4caf50; border: none"
+                >
+                  Duyệt
+                </button>
+                <button
+                  class="btn delete-btn"
+                  style="background-color: #f44336; border: none"
+                >
+                  Xóa
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>0002</td>
+              <td>23/03/2025</td>
+              <td>Trần Thị B</td>
+              <td>Samsung Galaxy S24 Ultra</td>
+              <td>Giao hàng nhanh, chất lượng ok</td>
+              <td>Đã duyệt</td>
+              <td>
+                <button
+                  class="btn delete-btn"
+                  style="background-color: #f44336; border: none"
+                >
+                  Xóa
+                </button>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
-      <div id="editPopup" class="popup">
-        <div class="popup-content">
-          <h3 style="font-size: 16px">Chỉnh sửa tài khoản</h3>
-          <label>Tên tài khoản:</label>
-          <input type="text" id="editName" maxlength="25" />
-
-          <label>Email:</label>
-          <input type="email" id="editEmail" maxlength="40" />
-
-          <label>Vai trò:</label>
-          <select id="editRole">
-            <option value="Admin">Admin</option>
-            <option value="User">User</option>
-          </select>
-
-          <label>Trạng thái:</label>
-          <select id="editStatus">
-            <option value="Hoạt động">Hoạt động</option>
-            <option value="Bị khóa">Bị khóa</option>
-          </select>
-
-          <button onclick="saveChanges()">Lưu</button>
-          <button onclick="closePopup()">Đóng</button>
-        </div>
-      </div>
     </main>
     <script src="assets/javascript/hide-show.js"></script>
-    <script src="assets/javascript/user-table.js"></script>
+    <script src="assets/javascript/comment-manager.js"></script>
   </body>
 </html>

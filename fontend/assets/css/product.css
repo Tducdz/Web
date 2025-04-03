@@ -190,3 +190,31 @@ main {
 .register {
   /* display: none; */
 }
+
+/* ============= Comment ============= */
+
+.comment-list {
+  margin-top: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px 12px;
+  border-radius: 8px;
+}
+
+.comment-item {
+  padding: 8px 0;
+}
+
+.comment-item .user {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.comment-item .date {
+  margin-left: 12px;
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.comment .comment-content {
+  margin-top: 4px;
+}
