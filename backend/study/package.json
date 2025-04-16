@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon --inspect src/index.js",
+    "start": "concurrently \"npm:dev\" \"npm:watch\"",
+    "dev": "nodemon --inspect src/index.js",
     "watch": "sass --watch src/resources/scss/app.scss:src/public/css/app.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,9 +15,13 @@
     "@babel/runtime": "^7.27.0",
     "core-js": "^3.41.0",
     "express": "^4.21.2",
-    "express-handlebars": "^8.0.1"
+    "express-handlebars": "^8.0.1",
+    "mongodb": "^6.15.0",
+    "mongoose-delete": "^1.0.2",
+    "mongoose-slug-generator": "^1.0.4"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "morgan": "^1.10.0",
     "prettier": "^3.5.3",
     "prettier-plugin-twig-melody": "^0.4.6",
