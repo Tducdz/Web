@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TDucShop - Sản phẩm</title>
+    <title>TDucShop - Giao hàng</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,8 +17,7 @@
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/grid.css" />
     <link rel="stylesheet" href="assets/css/header.css" />
-    <link rel="stylesheet" href="assets/css/product.css" />
-    <link rel="stylesheet" href="assets/css/login.css" />
+    <link rel="stylesheet" href="assets/css/policy.css" />
     <link rel="stylesheet" href="assets/css/footer.css" />
     <script
       src="https://kit.fontawesome.com/8373f8f77a.js"
@@ -28,7 +27,7 @@
   <body>
     <header>
       <nav>
-        <a href="/Lap Trinh Web/fontend/index.html" class="logo-shop"
+        <a href="/Lap Trinh Web/frontend/index.html" class="logo-shop"
           ><span class="logo-text">TDucShop</span></a
         >
         <ul>
@@ -74,7 +73,7 @@
               <span>Giỏ hàng</span>
             </a>
           </li>
-          <li id="login-click">
+          <li>
             <a href="#" class="mode">
               <i class="fa-solid fa-user" style="color: #ffffff"></i>
               <span>Đăng nhập</span>
@@ -85,119 +84,55 @@
     </header>
 
     <main>
-      <div class="product">
-        <div class="product-img">
-          <img src="assets/img/iphone-16-pro-max.png" alt="iphone-16-pro-max" />
-          <h3
-            style="
-              text-align: center;
-              font-size: 16px;
-              font-weight: 600;
-              margin-top: 12px;
-            "
-          >
-            Iphone 16 Pro Max
-          </h3>
-          <p
-            style="
-              text-align: center;
-              font-size: 20px;
-              font-weight: 500;
-              margin-top: 8px;
-            "
-          >
-            Giá ưu đãi: 30.990.000đ
-          </p>
-          <div class="table">
-            <h2>
-              <i class="fa-solid fa-gift" style="color: #ff5757"></i> Khuyến mãi
-            </h2>
-            <p>
-              <i class="fa-solid fa-star" style="color: #ffd43b"></i> Trả góp
-              0%, kỳ hạn 12 tháng, không phụ phí
-            </p>
-            <p>
-              <i class="fa-solid fa-star" style="color: #ffd43b"></i> Tặng
-              Voucher giảm 300.000đ cho đơn hàng tiếp theo
-            </p>
-            <p>
-              <i class="fa-solid fa-star" style="color: #ffd43b"></i> Giảm ngay
-              200.000đ khi khách hàng là sinh viên
-            </p>
-          </div>
-        </div>
-        <div class="functions">
-          <div class="button red">Mua ngay</div>
-          <div class="button orange">Thêm vào giỏ hàng</div>
-          <div class="product-information">
-            <h2>Thông số kỹ thuật</h2>
-            <div class="information-form">
-              <ul>
-                <li>Kích thước màn hình:</li>
-                <li>Công nghệ màn hình:</li>
-                <li>Chipset:</li>
-                <li>Công nghệ NFC:</li>
-                <li>Dung lượng RAM:</li>
-                <li>Bộ nhớ trong:</li>
-                <li>Pin:</li>
-                <li>Số thẻ SIM:</li>
-                <li>Hệ điều hành:</li>
-                <li>Chỉ số kháng nước:</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="extra">
-          <div class="table">
-            <h2>Sản phẩm còn hàng tại</h2>
-            <p>Km 10 Nguyễn Trãi, Hà Đông, Hà Nội</p>
-            <p>122 Hoàng Quốc Việt, Nghĩa Tân, Cầu Giấy, Hà Nội</p>
-            <p>Đường Man Thiện, Thủ Đức, TP.HCM</p>
-          </div>
-          <div class="table">
-            <h2>Yên Tâm Mua Sắm</h2>
-            <p>Đội ngũ kỹ thuật tư vấn chuyên sâu</p>
-            <p>Thanh toán thuận tiện</p>
-            <p>Sản phẩm 100% chính hãng</p>
-            <p>Bảo hành 1 đổi 1</p>
-            <p>Giá rẻ nhất thị trường</p>
-          </div>
-        </div>
-      </div>
-      <div class="comment">
-        <h2>Bình luận</h2>
-        <textarea
-          name=""
-          id=""
-          placeholder="Hãy viết câu hỏi của bạn về sản phẩm..."
-        ></textarea>
-        <button onclick="">Gửi bình luận</button>
-        <!-- Bình luận ví dụ -->
-        <div class="comment-list">
-          <div class="comment-item">
-            <div class="comment-header">
-              <span class="user">Nguyễn Văn A</span>
-              <span class="date"
-                ><i class="fa-regular fa-clock fa-l"></i> 22/03/2025</span
-              >
-            </div>
-            <div class="comment-content">
-              Sản phẩm rất tốt, camera chụp ảnh đẹp, pin dùng được lâu!
-            </div>
-          </div>
-          <div class="comment-item">
-            <div class="comment-header">
-              <span class="user">Trần Thị B</span>
-              <span class="date"
-                ><i class="fa-regular fa-clock fa-l"></i> 23/03/2025</span
-              >
-            </div>
-            <div class="comment-content">
-              Giao hàng nhanh, đóng gói cẩn thận, rất hài lòng với dịch vụ.
-            </div>
-          </div>
-        </div>
-      </div>
+      <h1>Chính sách giao hàng - TDucShop</h1>
+      <h2>1. Phạm vi áp dụng</h2>
+      <ul>
+        <li>
+          TducShop nhận giao hàng trên toàn quốc thông qua các đơn vị vận chuyển
+          uy tín như GHN, GHTK, Viettel Post, J&T,...
+        </li>
+      </ul>
+      <h2>2. Thời gian giao hàng</h2>
+      <ul>
+        <li>Khu vực nội thành (Hà Nội, TP.HCM): 1 - 2 ngày.</li>
+        <li>Khu vực ngoại thành & tỉnh thành khác: 3 - 5 ngày.</li>
+        <li>Địa chỉ vùng sâu, xa, hải đảo: 5 - 7 ngày.</li>
+        <li>
+          🚀 Shop hỗ trợ giao hàng nhanh trong ngày với các đơn nội thành đặt
+          trước 12h trưa.
+        </li>
+      </ul>
+      <h2>3. Phí vận chuyển</h2>
+      <p>Miễn phí giao hàng cho đơn từ 1.000.000đ trở lên.</p>
+      <p>Đơn dưới 1.000.000đ, phí vận chuyển:</p>
+      <ul>
+        <li>Nội thành: 20.000đ - 30.000đ</li>
+        <li>Ngoại thành & tỉnh khác: 30.000đ - 50.000đ</li>
+        <li>
+          Hỗ trợ COD (nhận hàng trả tiền) với phí thu hộ theo đơn vị vận chuyển.
+        </li>
+      </ul>
+      <h2>4. Quy trình giao hàng</h2>
+      <ul>
+        <li>Xác nhận đơn hàng: Nhân viên gọi điện xác nhận trước khi giao.</li>
+        <li>Giao hàng: Đơn hàng được gửi đến đơn vị vận chuyển.</li>
+        <li>
+          Nhận hàng & kiểm tra: Khách hàng có thể kiểm tra hàng trước khi thanh
+          toán.
+        </li>
+      </ul>
+      <p>
+        📌 Lưu ý: Nếu khách không nhận hàng mà không có lý do chính đáng, shop
+        có thể từ chối giao hàng lần sau.
+      </p>
+      <h2>5. Chính sách đổi trả do lỗi vận chuyển</h2>
+      <ul>
+        <li>
+          Nếu sản phẩm bị hư hỏng, vỡ, sai hàng do quá trình vận chuyển, khách
+          hàng có thể từ chối nhận hàng.
+        </li>
+        <li>Liên hệ ngay với shop để được hỗ trợ đổi/trả hoặc hoàn tiền.</li>
+      </ul>
 
       <!-- <div class="login">
         <div class="login-form">
@@ -266,29 +201,5 @@
         </div>
       </div>
     </footer>
-    <div id="login">
-      <div class="login-form">
-        <h2>Đăng nhập</h2>
-        <label for="username">Tên đăng nhập: </label>
-        <input type="text" name="" id="username" />
-
-        <label for="password">Mật khẩu: </label>
-        <input type="text" name="" id="password" />
-
-        <label for="rewrite" class="register">Xác nhận mật khẩu: </label>
-        <input type="text" class="register" name="" id="rewrite" />
-
-        <div class="help">
-          <span id="register-btn">Đăng ký</span>
-          <span>Quên mật khẩu?</span>
-        </div>
-
-        <button type="submit" id="login-btn" class="login-btn">
-          Đăng nhập
-        </button>
-        <button type="submit" class="register">Đăng ký</button>
-      </div>
-    </div>
-    <script src="assets/javascript/login.js"></script>
   </body>
 </html>

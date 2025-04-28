@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TDucShop - Giao hàng</title>
+    <title>Tài khoản</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,9 +15,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/reset.css" />
-    <link rel="stylesheet" href="assets/css/grid.css" />
     <link rel="stylesheet" href="assets/css/header.css" />
-    <link rel="stylesheet" href="assets/css/policy.css" />
+    <link rel="stylesheet" href="assets/css/yourAccount.css" />
     <link rel="stylesheet" href="assets/css/footer.css" />
     <script
       src="https://kit.fontawesome.com/8373f8f77a.js"
@@ -27,7 +26,7 @@
   <body>
     <header>
       <nav>
-        <a href="/Lap Trinh Web/fontend/index.html" class="logo-shop"
+        <a href="/Lap Trinh Web/frontend/index.html" class="logo-shop"
           ><span class="logo-text">TDucShop</span></a
         >
         <ul>
@@ -73,90 +72,47 @@
               <span>Giỏ hàng</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="#" class="mode">
               <i class="fa-solid fa-user" style="color: #ffffff"></i>
               <span>Đăng nhập</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
     </header>
-
     <main>
-      <h1>Chính sách giao hàng - TDucShop</h1>
-      <h2>1. Phạm vi áp dụng</h2>
-      <ul>
-        <li>
-          TducShop nhận giao hàng trên toàn quốc thông qua các đơn vị vận chuyển
-          uy tín như GHN, GHTK, Viettel Post, J&T,...
-        </li>
-      </ul>
-      <h2>2. Thời gian giao hàng</h2>
-      <ul>
-        <li>Khu vực nội thành (Hà Nội, TP.HCM): 1 - 2 ngày.</li>
-        <li>Khu vực ngoại thành & tỉnh thành khác: 3 - 5 ngày.</li>
-        <li>Địa chỉ vùng sâu, xa, hải đảo: 5 - 7 ngày.</li>
-        <li>
-          🚀 Shop hỗ trợ giao hàng nhanh trong ngày với các đơn nội thành đặt
-          trước 12h trưa.
-        </li>
-      </ul>
-      <h2>3. Phí vận chuyển</h2>
-      <p>Miễn phí giao hàng cho đơn từ 1.000.000đ trở lên.</p>
-      <p>Đơn dưới 1.000.000đ, phí vận chuyển:</p>
-      <ul>
-        <li>Nội thành: 20.000đ - 30.000đ</li>
-        <li>Ngoại thành & tỉnh khác: 30.000đ - 50.000đ</li>
-        <li>
-          Hỗ trợ COD (nhận hàng trả tiền) với phí thu hộ theo đơn vị vận chuyển.
-        </li>
-      </ul>
-      <h2>4. Quy trình giao hàng</h2>
-      <ul>
-        <li>Xác nhận đơn hàng: Nhân viên gọi điện xác nhận trước khi giao.</li>
-        <li>Giao hàng: Đơn hàng được gửi đến đơn vị vận chuyển.</li>
-        <li>
-          Nhận hàng & kiểm tra: Khách hàng có thể kiểm tra hàng trước khi thanh
-          toán.
-        </li>
-      </ul>
-      <p>
-        📌 Lưu ý: Nếu khách không nhận hàng mà không có lý do chính đáng, shop
-        có thể từ chối giao hàng lần sau.
-      </p>
-      <h2>5. Chính sách đổi trả do lỗi vận chuyển</h2>
-      <ul>
-        <li>
-          Nếu sản phẩm bị hư hỏng, vỡ, sai hàng do quá trình vận chuyển, khách
-          hàng có thể từ chối nhận hàng.
-        </li>
-        <li>Liên hệ ngay với shop để được hỗ trợ đổi/trả hoặc hoàn tiền.</li>
-      </ul>
-
-      <!-- <div class="login">
-        <div class="login-form">
-          <h2>Đăng nhập</h2>
-          <label for="username">Tên đăng nhập: </label>
-          <input type="text" name="" id="username" />
-
-          <label for="password">Mật khẩu: </label>
-          <input type="text" name="" id="password" />
-
-          <label for="rewrite" class="register">Xác nhận mật khẩu: </label>
-          <input type="text" class="register" name="" id="rewrite" />
-
-          <div class="help">
-            <span>Đăng ký</span>
-            <span>Quên mật khẩu?</span>
-          </div>
-
-          <button type="submit" class="login-btn">Đăng nhập</button>
-          <button type="submit" class="register">Đăng ký</button>
+      <div class="nav-bar">
+        <a href="yourAccount.html">Thông tin tài khoản</a>
+        <a href="cusomerOrders.html">Danh sách đơn hàng</a>
+        <a href="index.html">Đăng xuất</a>
+      </div>
+      <div class="content">
+        <div class="account-infor">
+          <h3>Thông tin cá nhân</h3>
+          <p>Họ tên:</p>
+          <input type="text" />
+          <p>Số điện thoại:</p>
+          <input type="text" />
+          <p>Địa chỉ:</p>
+          <input type="text" />
+          <p>Email:</p>
+          <input type="text" />
+          <button class="infor-button">Lưu thay đổi</button>
         </div>
-      </div> -->
-    </main>
 
+        <div class="account-password">
+          <h3>Thay đổi mật khẩu</h3>
+          <p>Mật khẩu cũ:</p>
+          <input type="password" placeholder="Nhập mật khẩu cũ" />
+          <p>Mật khẩu mới:</p>
+          <input type="password" placeholder="Nhập mật khẩu mới" />
+          <p>Xác nhận mật khẩu mới:</p>
+          <input type="password" placeholder="Xác nhận mật khẩu" />
+          <button class="password-button">Thay đổi mật khẩu</button>
+        </div>
+      </div>
+    </main>
     <footer>
       <div class="footer-container">
         <div class="part">
@@ -201,5 +157,6 @@
         </div>
       </div>
     </footer>
+    <script src="assets/javascript/main.js"></script>
   </body>
 </html>

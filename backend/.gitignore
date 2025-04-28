@@ -1,0 +1,10 @@
+# Node.js
+node_modules/
+.env
+
+# Logs
+*.log
+
+# hệ điều hành
+.DS_Store
+Thumbs.db

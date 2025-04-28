@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TDucShop - Bảo hành</title>
+    <title>Đơn hàng</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,9 +15,9 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/reset.css" />
-    <link rel="stylesheet" href="assets/css/grid.css" />
     <link rel="stylesheet" href="assets/css/header.css" />
-    <link rel="stylesheet" href="assets/css/policy.css" />
+    <link rel="stylesheet" href="assets/css/customerOrders.css" />
+    <link rel="stylesheet" href="assets/css/login.css" />
     <link rel="stylesheet" href="assets/css/footer.css" />
     <script
       src="https://kit.fontawesome.com/8373f8f77a.js"
@@ -27,7 +27,7 @@
   <body>
     <header>
       <nav>
-        <a href="/Lap Trinh Web/fontend/index.html" class="logo-shop"
+        <a href="/Lap Trinh Web/frontend/index.html" class="logo-shop"
           ><span class="logo-text">TDucShop</span></a
         >
         <ul>
@@ -73,95 +73,39 @@
               <span>Giỏ hàng</span>
             </a>
           </li>
-          <li>
+          <!-- <li id="login-click">
             <a href="#" class="mode">
               <i class="fa-solid fa-user" style="color: #ffffff"></i>
               <span>Đăng nhập</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
     </header>
     <main>
-      <h1>Chính sách bảo hành - TDucShop</h1>
-      <h2>1. Đối tượng áp dụng</h2>
-      <ul>
-        <li>
-          Chính sách này áp dụng cho tất cả các khách hàng mua điện thoại tại
-          TDucShop và có hóa đơn hợp lệ.
-        </li>
-      </ul>
-      <h2>2. Thời gian bảo hành</h2>
-      <ul>
-        <li>
-          Điện thoại mới: Bảo hành 12 - 24 tháng theo chính sách của nhà sản
-          xuất.
-        </li>
-        <li>
-          Điện thoại cũ (Like New, 99%): Bảo hành 3 - 12 tháng (tùy sản phẩm).
-        </li>
-        <li>Phụ kiện đi kèm: Bảo hành 1 - 6 tháng.</li>
-      </ul>
-      <h2>3. Điều kiện bảo hành</h2>
-      <ul>
-        ✅ Điện thoại được bảo hành nếu:
-        <li>Lỗi phát sinh do nhà sản xuất (phần cứng, phần mềm).</li>
-        <li>Thiết bị còn nguyên tem, nguyên vẹn, không bị rơi vỡ, vào nước.</li>
-        <li>Còn trong thời gian bảo hành.</li>
-      </ul>
-      <ul>
-        🚫 Từ chối bảo hành nếu:
-        <li>
-          Máy bị rơi vỡ, móp méo, vào nước hoặc hư hỏng do tác động bên ngoài.
-        </li>
-        <li>
-          Máy bị can thiệp phần cứng, sửa chữa ở nơi khác không phải TducShop.
-        </li>
-        <li>Máy bị lỗi do cài đặt phần mềm không hợp lệ, virus.</li>
-      </ul>
-      <h2>4. Quy trình bảo hành</h2>
-      <ul>
-        <li>Mang sản phẩm đến cửa hàng hoặc liên hệ hỗ trợ online.</li>
-        <li>Nhân viên kiểm tra lỗi và xác nhận điều kiện bảo hành.</li>
-        <li>
-          Tiến hành sửa chữa/thay thế linh kiện (thời gian từ 3 - 7 ngày).
-        </li>
-        <li>Trả máy cho khách hàng và kiểm tra lại trước khi nhận.</li>
-      </ul>
-      <h2>5. Chính sách đổi máy mới</h2>
-      <ul>
-        <li>Đổi mới trong 7 ngày đầu nếu lỗi từ nhà sản xuất.</li>
-        <li>
-          Nếu không có máy mới, khách hàng có thể đổi sang sản phẩm khác hoặc
-          hoàn tiền (theo chính sách cửa hàng).
-        </li>
-      </ul>
-      <h2>6. Hỗ trợ sau bảo hành</h2>
-      <ul>
-        <li>Nếu hết hạn bảo hành, TducShop hỗ trợ sửa chữa với giá ưu đãi.</li>
-        <li>Tư vấn miễn phí về cách sử dụng và bảo vệ điện thoại.</li>
-      </ul>
-      <!-- <div class="login">
-        <div class="login-form">
-          <h2>Đăng nhập</h2>
-          <label for="username">Tên đăng nhập: </label>
-          <input type="text" name="" id="username" />
-
-          <label for="password">Mật khẩu: </label>
-          <input type="text" name="" id="password" />
-
-          <label for="rewrite" class="register">Xác nhận mật khẩu: </label>
-          <input type="text" class="register" name="" id="rewrite" />
-
-          <div class="help">
-            <span>Đăng ký</span>
-            <span>Quên mật khẩu?</span>
-          </div>
-
-          <button type="submit" class="login-btn">Đăng nhập</button>
-          <button type="submit" class="register">Đăng ký</button>
-        </div>
-      </div> -->
+      <div class="nav-bar">
+        <a href="yourAccount.html">Thông tin tài khoản</a>
+        <a href="cusomerOrders.html">Danh sách đơn hàng</a>
+        <a href="index.html">Đăng xuất</a>
+      </div>
+      <div class="content">
+        <h3>Đơn hàng của bạn</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Mã Đơn</th>
+              <th>Ngày Đặt</th>
+              <th>Sản Phẩm</th>
+              <th>Số Lượng</th>
+              <th>Tổng Tiền</th>
+              <th>Trạng Thái</th>
+            </tr>
+          </thead>
+          <tbody id="orderTable">
+            <!-- Dữ liệu sẽ được thêm bằng JavaScript -->
+          </tbody>
+        </table>
+      </div>
     </main>
     <footer>
       <div class="footer-container">
@@ -207,5 +151,6 @@
         </div>
       </div>
     </footer>
+    <script src="assets/javascript/main.js"></script>
   </body>
 </html>
