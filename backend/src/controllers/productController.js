@@ -98,20 +98,37 @@ const getProducts = (req, res) => {
 const getProductById = (req, res) => {
   const productId = req.params.id;
 
-  const sql = "SELECT * FROM products WHERE id = ?";
+  const sqlProduct = "SELECT * FROM products WHERE id = ?";
+  const sqlComments = `
+    SELECT c.id, c.comment, c.creat_at, u.name AS user_name
+    FROM Comments c
+    JOIN Users u ON c.user_id = u.id
+    WHERE c.product_id = ?
+    ORDER BY c.creat_at DESC
+  `;
 
-  db.query(sql, [productId], (err, results) => {
+  db.query(sqlProduct, [productId], (err, productResult) => {
     if (err) {
-      return res
-        .status(500)
-        .json({ message: "Lỗi khi lấy chi tiết sản phẩm." });
+      return res.status(500).json({ message: "Lỗi lấy chi tiết sản phẩm." });
     }
 
-    if (results.length === 0) {
+    if (productResult.length === 0) {
       return res.status(404).json({ message: "Không tìm thấy sản phẩm." });
     }
 
-    res.status(200).json(results[0]);
+    const product = productResult[0];
+
+    // Comment
+    db.query(sqlComments, [productId], (err, commentResult) => {
+      if (err) {
+        return res.status(500).json({ message: "Lỗi lấy bình luận." });
+      }
+
+      res.status(200).json({
+        product,
+        comments: commentResult,
+      });
+    });
   });
 };
 

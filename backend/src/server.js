@@ -24,6 +24,12 @@ app.use("/product", products);
 const addToCart = require("./routes/cart");
 app.use("/cart", addToCart);
 
+const order = require("./routes/order");
+app.use("/order", order);
+
+const review = require("./routes/review");
+app.use("/review", review);
+
 // test connection
 app.listen(port, hostname, () => {
   console.log(`Example app listening on port ${port}`);
