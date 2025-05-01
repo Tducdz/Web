@@ -30,6 +30,9 @@ app.use("/order", order);
 const review = require("./routes/review");
 app.use("/review", review);
 
+const admin = require("./routes/admin");
+app.use("/admin", admin);
+
 // test connection
 app.listen(port, hostname, () => {
   console.log(`Example app listening on port ${port}`);

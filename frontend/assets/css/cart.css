@@ -19,7 +19,6 @@ h1 {
 }
 
 .item {
-  display: flex;
   align-items: center;
   padding: 8px 0;
   text-decoration: none;
@@ -30,10 +29,18 @@ h1 {
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
 }
 
-.item:hover {
+.item-infor {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  text-decoration: none;
+  color: black;
+}
+
+/* .item:hover {
   border: 1px solid black;
   transform: translateY(-3px);
-}
+} */
 
 .item img {
   width: 60px;
@@ -53,6 +60,20 @@ h1 {
 .item .price-current {
   color: #d7000e;
   font-weight: 700;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  width: 80px;
+  margin: 0 auto;
+}
+
+.fa-trash {
+  position: absolute;
+  cursor: pointer;
+  right: -64px;
+  top: 4px;
 }
 
 /* ================ Form ================ */

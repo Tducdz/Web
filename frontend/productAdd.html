@@ -25,9 +25,7 @@
   </head>
   <body>
     <header>
-      <a class="logo" href="/Lap Trinh Web/frontend/index.html"
-        ><h1>TDucShop</h1></a
-      >
+      <a class="logo" href="index.html"><h1>TDucShop</h1></a>
       <h2>Trang Quản Trị</h2>
     </header>
     <main>
@@ -87,7 +85,13 @@
         </div>
         <div class="nfc">
           <p>Hỗ trợ NFC</p>
-          <input type="text" placeholder="Có hỗ trợ NFC không?" />
+          <select
+            id="mySelect"
+            style="margin-top: 8px; padding: 4px; border: 1px solid"
+          >
+            <option value="yes">Có</option>
+            <option value="no">Không</option>
+          </select>
         </div>
         <div class="ram">
           <p>Dung lượng RAM</p>
@@ -117,10 +121,12 @@
           <p>Ảnh sản phẩm</p>
           <label for="fileUpload" class="custom-file-label">Chọn tệp</label>
           <input type="file" id="fileUpload" style="display: none" />
+          <p id="fileName"></p>
         </div>
         <button class="confirm-button">Xác nhận</button>
       </div>
     </main>
     <script src="assets/javascript/hide-show.js"></script>
+    <script src="assets/javascript/displayFile.js"></script>
   </body>
 </html>
