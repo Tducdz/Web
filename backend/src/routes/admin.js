@@ -27,6 +27,13 @@ const {
   deleteComment,
 } = require("../controllers/adminCommentCongtroller");
 
+const {
+  getAllOrders,
+  searchOrders,
+  updateOrderStatus,
+  deleteOrder,
+} = require("../controllers/adminOrderController");
+
 router.get("/", getAdminSummary);
 
 router.get("/product-manage", getPageProducts);
@@ -48,5 +55,10 @@ router.get("/comments", getComments);
 router.get("/comments/search", getCommentsByProductName);
 router.put("/comments/:id", censorComment);
 router.delete("/comments/:id", deleteComment);
+
+router.get("/orders", getAllOrders);
+router.get("/orders/search", searchOrders);
+router.put("/orders/:id/status", updateOrderStatus);
+router.delete("/orders/:id", deleteOrder);
 
 module.exports = router;
