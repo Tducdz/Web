@@ -13,10 +13,35 @@ button {
 }
 
 .content {
+  position: relative;
   margin-top: 32px;
   margin-left: 32px;
   width: 100%;
   font-size: 16px;
+}
+
+.table-control {
+  position: absolute;
+  display: flex;
+  right: 50px;
+  top: 32px;
+}
+
+.control-btn {
+  cursor: pointer;
+  border: 1px #ccc solid;
+  padding: 4px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.control-page {
+  border: 1px #ccc solid;
+  padding: 4px;
+  min-width: 24px;
+  border-radius: 4px;
+  margin-left: 8px;
+  text-align: center;
 }
 
 /* ================ Table ================= */
