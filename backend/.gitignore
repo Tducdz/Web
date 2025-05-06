@@ -8,3 +8,6 @@ node_modules/
 # hệ điều hành
 .DS_Store
 Thumbs.db
+
+# khác
+NMCNPM

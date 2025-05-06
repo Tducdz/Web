@@ -41,7 +41,8 @@ router.get("/search", searchProducts);
 router.get("/product-manage/:id", getProductById);
 router.put("/product-manage/:id", updateProduct);
 router.delete("/product-manage/:id", deleteProduct);
-router.post("/product-manage/add", addProduct);
+const upload = require("../middleware/upload");
+router.post("/product-manage/add", upload.single("image"), addProduct);
 
 router.get("/users", getUsers);
 router.get("/users/search", searchUsers);

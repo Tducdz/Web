@@ -152,28 +152,28 @@ const addProduct = (req, res) => {
     sim_slots,
     os,
     water_resistant,
-    image_url,
     stock,
   } = req.body;
 
-  // Check name exist
-  const checkProductSql = "SELECT * FROM Products WHERE name = ?";
+  const imagePath = req.file ? `/img/${req.file.filename}` : null;
 
+  if (!imagePath) {
+    return res.status(400).json({ message: "Vui lòng tải lên ảnh sản phẩm." });
+  }
+
+  const checkProductSql = "SELECT * FROM Products WHERE name = ?";
   db.query(checkProductSql, [name], (err, result) => {
-    if (err) {
-      return res.status(500).json({ message: "Lỗi kiểm tra sản phẩm trùng." });
-    }
+    if (err) return res.status(500).json({ message: "Lỗi kiểm tra sản phẩm." });
 
     if (result.length > 0) {
       return res.status(400).json({ message: "Sản phẩm đã tồn tại." });
     }
 
-    // not exist
     const sql = `
-        INSERT INTO Products 
-        (category_id, name, price, screen_size, screen_tech, chipset, nfc, RAM, ROM, battery, sim_slots, os, water_resistant, image_url, stock)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `;
+      INSERT INTO Products 
+      (category_id, name, price, screen_size, screen_tech, chipset, nfc, RAM, ROM, battery, sim_slots, os, water_resistant, image_url, stock)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
 
     db.query(
       sql,
@@ -191,13 +191,11 @@ const addProduct = (req, res) => {
         sim_slots,
         os,
         water_resistant,
-        image_url,
+        imagePath, // lưu đường dẫn
         stock,
       ],
       (err, result) => {
-        if (err) {
-          return res.status(500).json({ message: "Lỗi thêm sản phẩm." });
-        }
+        if (err) return res.status(500).json({ message: "Lỗi thêm sản phẩm." });
         res.status(201).json({ message: "Thêm sản phẩm thành công." });
       }
     );
