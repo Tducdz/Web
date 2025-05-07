@@ -86,17 +86,21 @@ const getUserById = (req, res) => {
 
 const updateUser = (req, res) => {
   const { id } = req.params;
-  const { ten_tai_khoan, so_dien_thoai, vai_tro } = req.body;
+  const { ten_tai_khoan, mat_khau, so_dien_thoai, vai_tro } = req.body;
 
   const sql =
-    "UPDATE users SET ten_tai_khoan = ?, so_dien_thoai = ?, vai_tro = ? WHERE id = ?";
-  db.query(sql, [ten_tai_khoan, so_dien_thoai, vai_tro, id], (err, result) => {
-    if (err) {
-      console.error("Lỗi cập nhật:", err);
-      return res.status(500).json({ message: "Cập nhật thất bại" });
+    "UPDATE users SET ten_tai_khoan = ?, mat_khau = ?, so_dien_thoai = ?, vai_tro = ? WHERE id = ?";
+  db.query(
+    sql,
+    [ten_tai_khoan, mat_khau, so_dien_thoai, vai_tro, id],
+    (err, result) => {
+      if (err) {
+        console.error("Lỗi cập nhật:", err);
+        return res.status(500).json({ message: "Cập nhật thất bại" });
+      }
+      res.json({ message: "Cập nhật thành công" });
     }
-    res.json({ message: "Cập nhật thành công" });
-  });
+  );
 };
 
 const deleteUser = (req, res) => {

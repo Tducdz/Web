@@ -1,14 +1,14 @@
-let users = []; // Mảng lưu trữ người dùng
-let editingUserId = null; // Lưu ID tài khoản đang chỉnh sửa
-let currentPage = 1; // Theo dõi trang hiện tại
+let users = [];
+let editingUserId = null;
+let currentPage = 1;
 
-// Lấy danh sách người dùng từ backend
+// Lấy danh sách người dùng
 const fetchUsers = (page = 1, searchTerm = "") => {
-  let url = `http://localhost:8080/users`; // URL cơ bản
+  let url = `http://localhost:8080/users`;
   if (searchTerm) {
-    url += `/search?page=${page}&search=${searchTerm}`; // Thêm /search nếu có searchTerm
+    url += `/search?page=${page}&search=${searchTerm}`;
   } else {
-    url += `?page=${page}`; // Thêm query param page nếu không có searchTerm
+    url += `?page=${page}`;
   }
 
   fetch(url)
@@ -17,7 +17,7 @@ const fetchUsers = (page = 1, searchTerm = "") => {
       return response.json();
     })
     .then((data) => {
-      users = data.users; // Đảm bảo lấy dữ liệu từ data.users (như trước)
+      users = data.users;
       renderUsers();
     })
     .catch((error) => {
@@ -36,6 +36,7 @@ const renderUsers = () => {
     row.innerHTML = `
       <td>${index + 1}</td>
       <td>${user.ten_tai_khoan}</td>
+      <td>${user.mat_khau}</td>
       <td>${user.so_dien_thoai}</td>
       <td>${user.vai_tro}</td>
       <td class="actions">
@@ -74,6 +75,7 @@ const editUser = (id) => {
   if (user) {
     editingUserId = id; // Lưu ID người dùng đang sửa
     document.getElementById("editName").value = user.ten_tai_khoan;
+    document.getElementById("editPassword").value = user.mat_khau;
     document.getElementById("editSdt").value = user.so_dien_thoai;
     document.getElementById("editRole").value = user.vai_tro;
     document.getElementById("editPopup").style.display = "flex";
@@ -82,15 +84,15 @@ const editUser = (id) => {
   }
 };
 
-// Lưu thông tin chỉnh sửa
 const saveChanges = () => {
   if (editingUserId === null) return;
 
   const updatedName = document.getElementById("editName").value.trim();
+  const updatedPassword = document.getElementById("editPassword").value.trim();
   const updatedSdt = document.getElementById("editSdt").value.trim();
   const updatedRole = document.getElementById("editRole").value;
 
-  if (!updatedName || !updatedSdt || !updatedRole) {
+  if (!updatedName || !updatedSdt || !updatedRole || !updatedPassword) {
     alert("Vui lòng điền đầy đủ thông tin!");
     return;
   }
@@ -101,6 +103,16 @@ const saveChanges = () => {
     return;
   }
 
+  // Trùng sdt
+  const isDuplicate = users.some(
+    (user) => user.so_dien_thoai === updatedSdt && user.id !== editingUserId
+  );
+
+  if (isDuplicate) {
+    alert("Số điện thoại đã có tài khoản khác!");
+    return;
+  }
+
   fetch(`http://localhost:8080/users/${editingUserId}`, {
     method: "PUT",
     headers: {
@@ -108,12 +120,22 @@ const saveChanges = () => {
     },
     body: JSON.stringify({
       ten_tai_khoan: updatedName,
+      mat_khau: updatedPassword,
       so_dien_thoai: updatedSdt,
       vai_tro: updatedRole,
     }),
   })
     .then((response) => {
-      if (!response.ok) throw new Error("Cập nhật thất bại");
+      if (!response.ok) {
+        // **XỬ LÝ LỖI TRÙNG SỐ ĐIỆN THOẠI TỪ PHÍA SERVER (NẾU CÓ)**
+        if (response.status === 409) {
+          // Giả sử server trả về mã 409 khi số điện thoại trùng
+          return response.json().then((data) => {
+            throw new Error(data.message || "Số điện thoại này đã tồn tại!");
+          });
+        }
+        throw new Error("Cập nhật thất bại");
+      }
       return response.json();
     })
     .then(() => {
@@ -123,7 +145,7 @@ const saveChanges = () => {
     })
     .catch((error) => {
       console.error("Error updating user:", error);
-      alert("Đã xảy ra lỗi, vui lòng thử lại!");
+      alert(error.message || "Đã xảy ra lỗi, vui lòng thử lại!");
     });
 };
 
