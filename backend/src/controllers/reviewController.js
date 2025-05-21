@@ -5,7 +5,7 @@ const addReview = (req, res) => {
 
   // Check ordered
   const checkSQL = `
-      SELECT * FROM Orders_Details od
+      SELECT * FROM OrdersDetails od
       JOIN Orders o ON od.order_id = o.id
       WHERE o.user_id = ? AND od.product_id = ?
     `;

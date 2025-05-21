@@ -18,11 +18,13 @@
     <link rel="stylesheet" href="assets/css/grid.css" />
     <link rel="stylesheet" href="assets/css/header.css" />
     <link rel="stylesheet" href="assets/css/policy.css" />
+    <link rel="stylesheet" href="assets/css/login.css" />
     <link rel="stylesheet" href="assets/css/footer.css" />
     <script
       src="https://kit.fontawesome.com/8373f8f77a.js"
       crossorigin="anonymous"
     ></script>
+    <script src="/js/config.js"></script>
   </head>
   <body>
     <header>
@@ -45,8 +47,8 @@
           </li>
           <li>
             <div class="search-box">
-              <input type="search" placeholder="Tìm kiếm..." />
-              <button type="submit" aria-label="Tìm kiếm">
+              <input type="search" id="searchInput" placeholder="Tìm kiếm..." />
+              <button type="submit" id="searchBtn" aria-label="Tìm kiếm">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
             </div>
@@ -62,7 +64,7 @@
             </a>
           </li>
           <li>
-            <a href="cusomerOrders.html" class="mode">
+            <a href="customerOrders.html" class="mode">
               <i class="fa-solid fa-truck-fast" style="color: #ffffff"></i>
               <span>Tra cứu đơn hàng</span>
             </a>
@@ -73,7 +75,7 @@
               <span>Giỏ hàng</span>
             </a>
           </li>
-          <li>
+          <li id="login-click">
             <a href="#" class="mode">
               <i class="fa-solid fa-user" style="color: #ffffff"></i>
               <span>Đăng nhập</span>
@@ -134,27 +136,39 @@
         <li>Liên hệ ngay với shop để được hỗ trợ đổi/trả hoặc hoàn tiền.</li>
       </ul>
 
-      <!-- <div class="login">
+      <form id="login">
         <div class="login-form">
           <h2>Đăng nhập</h2>
-          <label for="username">Tên đăng nhập: </label>
-          <input type="text" name="" id="username" />
+          <label for="username">Email: </label>
+          <input
+            type="email"
+            name=""
+            id="username"
+            autocomplete="current-password"
+          />
 
           <label for="password">Mật khẩu: </label>
-          <input type="text" name="" id="password" />
+          <input
+            type="password"
+            name=""
+            id="password"
+            autocomplete="current-password"
+          />
 
           <label for="rewrite" class="register">Xác nhận mật khẩu: </label>
           <input type="text" class="register" name="" id="rewrite" />
 
           <div class="help">
-            <span>Đăng ký</span>
+            <span id="register-btn">Đăng ký</span>
             <span>Quên mật khẩu?</span>
           </div>
 
-          <button type="submit" class="login-btn">Đăng nhập</button>
+          <button type="submit" id="login-btn" class="login-btn">
+            Đăng nhập
+          </button>
           <button type="submit" class="register">Đăng ký</button>
         </div>
-      </div> -->
+      </form>
     </main>
 
     <footer>
@@ -201,5 +215,8 @@
         </div>
       </div>
     </footer>
+    <script src="assets/javascript/main.js"></script>
+    <script src="assets/javascript/login.js"></script>
+    <script src="assets/javascript/search.js"></script>
   </body>
 </html>

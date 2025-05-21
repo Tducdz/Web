@@ -72,6 +72,8 @@ td {
   border: 1px solid #555;
   padding: 8px;
   text-align: center;
+  display: table-cell;
+  vertical-align: middle;
 }
 th {
 }

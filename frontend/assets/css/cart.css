@@ -58,6 +58,7 @@ h1 {
 }
 
 .item .price-current {
+  margin-top: 8px;
   color: #d7000e;
   font-weight: 700;
 }
@@ -67,6 +68,11 @@ h1 {
   display: flex;
   width: 80px;
   margin: 0 auto;
+}
+
+.input-group .quantity {
+  text-align: center;
+  margin: 0 4px;
 }
 
 .fa-trash {

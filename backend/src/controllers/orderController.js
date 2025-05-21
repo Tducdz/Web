@@ -51,7 +51,7 @@ const createOrder = (req, res) => {
           item.price,
         ]);
         const orderDetailSQL = `
-        INSERT INTO Orders_Details (order_id, product_id, quantity, price)
+        INSERT INTO OrdersDetails (order_id, product_id, quantity, price)
         VALUES ?
       `;
 
@@ -106,6 +106,47 @@ const createOrder = (req, res) => {
   });
 };
 
+const getOrdersByUser = (req, res) => {
+  const userId = req.user.id;
+
+  const query = `
+    SELECT o.id AS order_id, o.order_date, o.total_price, o.order_status,
+           p.name AS product_name, od.quantity
+    FROM Orders o
+    JOIN OrderDetails od ON o.id = od.order_id
+    JOIN Products p ON od.product_id = p.id
+    WHERE o.user_id = ?
+    ORDER BY o.order_date DESC
+  `;
+
+  db.query(query, [userId], (err, results) => {
+    if (err) return res.status(500).json({ error: "Lỗi truy vấn CSDL" });
+
+    // Gom nhóm theo order_id vì 1 đơn hàng có thể có nhiều sản phẩm
+    const groupedOrders = {};
+
+    results.forEach((row) => {
+      if (!groupedOrders[row.order_id]) {
+        groupedOrders[row.order_id] = {
+          order_id: row.order_id,
+          order_date: row.order_date,
+          total_price: row.total_price,
+          order_status: row.order_status,
+          products: [],
+        };
+      }
+
+      groupedOrders[row.order_id].products.push({
+        name: row.product_name,
+        quantity: row.quantity,
+      });
+    });
+
+    res.json(Object.values(groupedOrders));
+  });
+};
+
 module.exports = {
   createOrder,
+  getOrdersByUser,
 };

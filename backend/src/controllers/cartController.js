@@ -1,6 +1,5 @@
 const db = require("../config/db");
 
-// Thêm hoặc cập nhật sản phẩm trong giỏ
 const addOrUpdateCart = (req, res) => {
   const { user_id, product_id, quantity } = req.body;
 
@@ -78,7 +77,6 @@ const addOrUpdateCart = (req, res) => {
   }
 };
 
-// // Lấy giỏ hàng của 1 user
 const getCartByUser = (req, res) => {
   const { user_id } = req.params;
 

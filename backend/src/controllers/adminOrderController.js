@@ -79,7 +79,7 @@ const deleteOrder = (req, res) => {
   const { id } = req.params;
 
   // delete orders_detail
-  const deleteDetailsQuery = `DELETE FROM Orders_Details WHERE order_id = ?`;
+  const deleteDetailsQuery = `DELETE FROM OrdersDetails WHERE order_id = ?`;
   db.query(deleteDetailsQuery, [id], (err, result) => {
     if (err) {
       console.error("Lỗi xóa chi tiết đơn hàng:", err);

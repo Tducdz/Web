@@ -11,9 +11,9 @@ const getAdminSummary = (req, res) => {
     `;
 
   const soldSQL = `
-      SELECT SUM(Orders_Details.quantity) AS productsSold
+      SELECT SUM(OrdersDetails.quantity) AS productsSold
       FROM Orders
-      JOIN Orders_Details ON Orders.id = Orders_Details.order_id
+      JOIN OrdersDetails ON Orders.id = OrdersDetails.order_id
       WHERE MONTH(Orders.order_date) = ? AND YEAR(Orders.order_date) = ?
     `;
 

@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let isRegistering = false;
 
-  // Hàm chuyển đổi giữa đăng nhập và đăng ký (giữ nguyên)
   function toggleRegisterForm() {
     isRegistering = !isRegistering;
 
@@ -39,25 +38,160 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   registerHelpBtn.addEventListener("click", toggleRegisterForm);
-  registerSubmitBtn.addEventListener("click", toggleRegisterForm);
 
-  // Xử lý sự kiện click để hiển thị form đăng nhập
-  loginClickBtn.addEventListener("click", function (event) {
-    event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a> (nếu có)
-    loginDiv.style.display = "flex"; // Hiển thị form bằng cách thay đổi display thành flex
-    isRegistering = false; // Đảm bảo khi hiển thị luôn ở trạng thái đăng nhập ban đầu
-    loginHeading.textContent = "Đăng nhập";
-    rewriteLabel.style.display = "none";
-    rewriteInput.style.display = "none";
-    forgotPasswordSpan.style.display = "block";
-    loginSubmitBtn.style.display = "block";
-    registerSubmitBtn.style.display = "none";
-    registerHelpBtn.textContent = "Đăng ký";
-  });
+  const token = localStorage.getItem("jwt_token");
+  if (!token) {
+    loginClickBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+      loginDiv.style.display = "flex";
+      isRegistering = false;
+      loginHeading.textContent = "Đăng nhập";
+      rewriteLabel.style.display = "none";
+      rewriteInput.style.display = "none";
+      forgotPasswordSpan.style.display = "block";
+      loginSubmitBtn.style.display = "block";
+      registerSubmitBtn.style.display = "none";
+      registerHelpBtn.textContent = "Đăng ký";
+    });
+  }
 
   window.addEventListener("click", function (event) {
     if (event.target === loginDiv) {
       loginDiv.style.display = "none";
     }
   });
+
+  loginSubmitBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (!email || !password) {
+      alert("Vui lòng nhập email và mật khẩu.");
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:8080/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("jwt_token", data.token);
+        localStorage.setItem("user_id", data.user.id);
+        localStorage.setItem("user_name", data.user.name);
+        localStorage.setItem("user_role", data.user.role);
+
+        alert("Đăng nhập thành công!");
+        window.location.reload();
+      } else {
+        alert(data.message || "Sai thông tin đăng nhập.");
+      }
+    } catch (err) {
+      console.error("Lỗi kết nối:", err);
+      alert("Không thể kết nối đến máy chủ.");
+    }
+  });
+
+  registerSubmitBtn.addEventListener("click", async function (e) {
+    if (!isRegistering) return;
+    e.preventDefault();
+
+    const email = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const confirm = document.getElementById("rewrite").value.trim();
+
+    if (!email || !password || !confirm) {
+      return alert("Vui lòng nhập đầy đủ thông tin.");
+    }
+
+    if (password !== confirm) {
+      return alert("Mật khẩu xác nhận không khớp.");
+    }
+
+    const name = email.split("@")[0];
+
+    try {
+      const res = await fetch("http://localhost:8080/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("Đăng ký thành công! Mời bạn đăng nhập.");
+        toggleRegisterForm();
+      } else {
+        alert(data.message || "Đăng ký thất bại.");
+      }
+    } catch (err) {
+      console.error("Lỗi đăng ký:", err);
+      alert("Không thể kết nối đến máy chủ.");
+    }
+  });
+
+  updateLoginButton();
 });
+
+function updateLoginButton() {
+  const userName = localStorage.getItem("user_name");
+  const userRole = localStorage.getItem("user_role"); // Lấy vai trò người dùng
+  const loginBtn = document.getElementById("login-click");
+
+  if (userName && loginBtn) {
+    let dropdownHTML = `
+      <div class="user-dropdown">
+        <a href="#" class="mode" id="user-toggle">
+          <i class="fa-solid fa-user" style="color: #ffffff"></i>
+          <span>${userName}</span>
+          <i class="fa-solid fa-caret-down" style="margin-left: 5px; color: white;"></i>
+        </a>
+        <ul class="dropdown-menu" id="user-menu">
+          <li><a href="yourAccount.html">Thông tin tài khoản</a></li>
+    `;
+
+    if (userRole === "admin") {
+      dropdownHTML += `<li><a href="adminHome.html">Trang quản trị</a></li>`;
+    }
+
+    dropdownHTML += `
+          <li><a href="#" id="logout-btn">Đăng xuất</a></li>
+        </ul>
+      </div>
+    `;
+
+    loginBtn.innerHTML = dropdownHTML;
+
+    // Toggle dropdown
+    const toggleBtn = document.getElementById("user-toggle");
+    const menu = document.getElementById("user-menu");
+
+    toggleBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      menu.classList.toggle("show");
+    });
+
+    // Đóng dropdown khi click ra ngoài
+    document.addEventListener("click", function (e) {
+      const isClickInside =
+        toggleBtn.contains(e.target) || menu.contains(e.target);
+      if (!isClickInside) {
+        menu.classList.remove("show");
+      }
+    });
+
+    // Log out
+    const logoutBtn = document.getElementById("logout-btn");
+    logoutBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      localStorage.clear();
+      window.location.reload();
+    });
+  }
+}

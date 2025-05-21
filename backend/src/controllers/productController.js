@@ -100,11 +100,11 @@ const getProductById = (req, res) => {
 
   const sqlProduct = "SELECT * FROM products WHERE id = ?";
   const sqlComments = `
-    SELECT c.id, c.comment, c.creat_at, u.name AS user_name
+    SELECT c.id, c.comment, c.create_at, u.name AS user_name
     FROM Comments c
     JOIN Users u ON c.user_id = u.id
     WHERE c.product_id = ?
-    ORDER BY c.creat_at DESC
+    ORDER BY c.create_at DESC
   `;
 
   db.query(sqlProduct, [productId], (err, productResult) => {

@@ -82,6 +82,8 @@ main .banner {
 }
 
 .container .item img {
+  width: 160px;
+  height: 160px;
   padding-top: 20px;
   display: block;
   margin: 0 auto;
@@ -89,6 +91,7 @@ main .banner {
 
 .container .product-info {
   padding: 12px 14px;
+  min-width: 210px;
 }
 
 .item .product-name {

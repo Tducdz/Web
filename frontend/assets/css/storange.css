@@ -94,12 +94,15 @@ main h1 {
 
 .item img {
   padding-top: 20px;
+  width: 160px;
+  height: 180px;
   display: block;
   margin: 0 auto;
 }
 
 .product-info {
   padding: 12px 14px;
+  min-width: 210px;
 }
 
 .item .product-name {
@@ -146,8 +149,9 @@ main h1 {
 .more-product {
   display: block;
   text-align: center;
-  margin-top: 28px;
+  margin: 28px auto;
   cursor: pointer;
+  width: 300px;
 }
 
 .more-product span {

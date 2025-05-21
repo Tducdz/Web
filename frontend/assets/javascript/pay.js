@@ -1,38 +1,66 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const orderButton = document.getElementById("order-submit");
-  const paymentPopup = document.getElementById("paymentPopup");
-  const closePayment = document.getElementById("closePayment");
-  const confirmPayment = document.getElementById("confirmPayment");
-  const totalAmount = document.getElementById("totalAmount");
-  const paymentMethod = document.getElementById("paymentMethod");
-  const qrCodeContainer = document.getElementById("qrCodeContainer");
+document.getElementById("order-submit").addEventListener("click", function (e) {
+  e.preventDefault();
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
 
-  let orderTotal = 294210000; // Tổng tiền mẫu (có thể cập nhật động)
+  if (!name || !phone || !address) {
+    return alert("Vui lòng điền đầy đủ thông tin giao hàng.");
+  }
 
-  // Hiển thị popup khi nhấn "Đặt hàng"
-  orderButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    totalAmount.innerText = orderTotal.toLocaleString();
-    paymentPopup.style.display = "block";
-  });
+  // Hiển thị popup thanh toán
+  document.getElementById("paymentPopup").style.display = "block";
+});
 
-  // Ẩn popup khi nhấn "Hủy"
-  closePayment.addEventListener("click", function () {
-    paymentPopup.style.display = "none";
-  });
-
-  // Hiển thị mã QR khi chọn "Chuyển khoản"
-  paymentMethod.addEventListener("change", function () {
-    if (paymentMethod.value === "Chuyển khoản") {
-      qrCodeContainer.style.display = "block";
+document
+  .getElementById("paymentMethod")
+  .addEventListener("change", function () {
+    const qrContainer = document.getElementById("qrCodeContainer");
+    if (this.value === "Chuyển khoản") {
+      qrContainer.style.display = "block";
     } else {
-      qrCodeContainer.style.display = "none";
+      qrContainer.style.display = "none";
     }
   });
 
-  // Xác nhận thanh toán
-  confirmPayment.addEventListener("click", function () {
-    alert("Thanh toán thành công bằng: " + paymentMethod.value);
-    paymentPopup.style.display = "none";
+document
+  .getElementById("confirmPayment")
+  .addEventListener("click", async () => {
+    const user_id = localStorage.getItem("user_id");
+    const payment_method = document.getElementById("paymentMethod").value;
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+
+    if (!user_id || !address || !payment_method) {
+      return alert("Thiếu thông tin đơn hàng.");
+    }
+
+    const shipping_address = `Tên: ${name} | SĐT: ${phone} | Địa chỉ: ${address}`;
+
+    try {
+      const res = await fetch("http://localhost:8080/order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+        },
+        body: JSON.stringify({ user_id, payment_method, shipping_address }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert("Đặt hàng thành công! Mã đơn: " + data.order_id);
+        window.location.href = "customerOrders.html";
+      } else {
+        alert("Lỗi: " + data.message);
+      }
+    } catch (err) {
+      console.error("Lỗi đặt hàng:", err);
+      alert("Không thể kết nối máy chủ.");
+    }
   });
+
+document.getElementById("closePayment").addEventListener("click", () => {
+  document.getElementById("paymentPopup").style.display = "none";
 });

@@ -25,6 +25,7 @@
       src="https://kit.fontawesome.com/8373f8f77a.js"
       crossorigin="anonymous"
     ></script>
+    <script src="/js/config.js"></script>
   </head>
   <body>
     <header>
@@ -47,8 +48,8 @@
           </li>
           <li>
             <div class="search-box">
-              <input type="search" placeholder="Tìm kiếm..." />
-              <button type="submit" aria-label="Tìm kiếm">
+              <input type="search" id="searchInput" placeholder="Tìm kiếm..." />
+              <button type="submit" id="searchBtn" aria-label="Tìm kiếm">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
             </div>
@@ -64,7 +65,7 @@
             </a>
           </li>
           <li>
-            <a href="cusomerOrders.html" class="mode">
+            <a href="customerOrders.html" class="mode">
               <i class="fa-solid fa-truck-fast" style="color: #ffffff"></i>
               <span>Tra cứu đơn hàng</span>
             </a>
@@ -75,12 +76,12 @@
               <span>Giỏ hàng</span>
             </a>
           </li>
-          <!-- <li id="login-click">
+          <li id="login-click">
             <a href="#" class="mode">
               <i class="fa-solid fa-user" style="color: #ffffff"></i>
               <span>Đăng nhập</span>
             </a>
-          </li> -->
+          </li>
         </ul>
       </nav>
     </header>
@@ -88,107 +89,7 @@
       <h1>Giỏ hàng của bạn:</h1>
       <div class="container">
         <div class="products grid">
-          <div class="row">
-            <div class="col l-4">
-              <div class="item">
-                <div class="item-infor">
-                  <img
-                    src="assets/img/iphone-16-pro-max.png"
-                    alt="iphone-16-pro-max"
-                  />
-                  <div class="product-infor">
-                    <span class="product-name"
-                      >iPhone 16 Pro Max 256GB | Chính hãng VN/A</span
-                    >
-                    <span class="price-current">32.690.000đ</span>
-                  </div>
-                </div>
-                <div class="input-group">
-                  <button class="btn" type="button" onclick="decrease()">
-                    −
-                  </button>
-                  <input
-                    style="width: 40px"
-                    type="text"
-                    class="text-center"
-                    id="quantity"
-                    value="0"
-                    readonly
-                  />
-                  <button class="btn" type="button" onclick="increase()">
-                    +
-                  </button>
-                  <i class="fa-solid fa-trash" style="color: #cc0000"></i>
-                </div>
-              </div>
-            </div>
-            <div class="col l-4">
-              <div class="item">
-                <div class="item-infor">
-                  <img
-                    src="assets/img/iphone-16-pro-max.png"
-                    alt="iphone-16-pro-max"
-                  />
-                  <div class="product-infor">
-                    <span class="product-name"
-                      >iPhone 16 Pro Max 256GB | Chính hãng VN/A</span
-                    >
-                    <span class="price-current">32.690.000đ</span>
-                  </div>
-                </div>
-                <div class="input-group">
-                  <button class="btn" type="button" onclick="decrease()">
-                    −
-                  </button>
-                  <input
-                    style="width: 40px"
-                    type="text"
-                    class="text-center"
-                    id="quantity"
-                    value="0"
-                    readonly
-                  />
-                  <button class="btn" type="button" onclick="increase()">
-                    +
-                  </button>
-                  <i class="fa-solid fa-trash" style="color: #cc0000"></i>
-                </div>
-              </div>
-            </div>
-            <div class="col l-4">
-              <div class="item">
-                <div class="item-infor">
-                  <img
-                    src="assets/img/iphone-16-pro-max.png"
-                    alt="iphone-16-pro-max"
-                  />
-                  <div class="product-infor">
-                    <span class="product-name"
-                      >iPhone 16 Pro Max 256GB | Chính hãng VN/A</span
-                    >
-                    <span class="price-current">32.690.000đ</span>
-                  </div>
-                </div>
-                <div class="input-group">
-                  <button class="btn" type="button" onclick="decrease()">
-                    −
-                  </button>
-                  <input
-                    style="width: 40px"
-                    type="text"
-                    class="text-center"
-                    id="quantity"
-                    value="0"
-                    readonly
-                  />
-                  <button class="btn" type="button" onclick="increase()">
-                    +
-                  </button>
-                  <i class="fa-solid fa-trash" style="color: #cc0000"></i>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="row" id="cart-list"></div>
         </div>
         <div class="delivery">
           <h2>Giao hàng đến:</h2>
@@ -202,23 +103,30 @@
             <label for="address">Địa chỉ giao hàng:</label>
             <textarea id="address"></textarea>
 
-            <label for="note">Ghi chú:</label>
-            <textarea id="note"></textarea>
-
             <button type="submit" id="order-submit" class="order-btn">
               Đặt hàng
             </button>
           </form>
         </div>
       </div>
-      <div id="login">
+      <form id="login">
         <div class="login-form">
           <h2>Đăng nhập</h2>
-          <label for="username">Tên đăng nhập: </label>
-          <input type="text" name="" id="username" />
+          <label for="username">Email: </label>
+          <input
+            type="email"
+            name=""
+            id="username"
+            autocomplete="current-password"
+          />
 
           <label for="password">Mật khẩu: </label>
-          <input type="text" name="" id="password" />
+          <input
+            type="password"
+            name=""
+            id="password"
+            autocomplete="current-password"
+          />
 
           <label for="rewrite" class="register">Xác nhận mật khẩu: </label>
           <input type="text" class="register" name="" id="rewrite" />
@@ -233,7 +141,7 @@
           </button>
           <button type="submit" class="register">Đăng ký</button>
         </div>
-      </div>
+      </form>
     </main>
     <footer>
       <div class="footer-container">
@@ -281,7 +189,7 @@
     </footer>
     <div id="paymentPopup">
       <h3 style="color: white">Thanh Toán</h3>
-      <p style="color: white">Tổng tiền: <span id="totalAmount">0</span> VND</p>
+      <p style="color: white">Tổng tiền: <span id="totalAmount"></span> VND</p>
 
       <label style="color: white">Chọn phương thức thanh toán:</label>
       <select id="paymentMethod">
@@ -307,18 +215,7 @@
     </div>
     <script src="assets/javascript/pay.js"></script>
     <script src="assets/javascript/login.js"></script>
-    <script>
-      function increase() {
-        let qty = document.getElementById("quantity");
-        qty.value = parseInt(qty.value) + 1;
-      }
-
-      function decrease() {
-        let qty = document.getElementById("quantity");
-        if (parseInt(qty.value) > 0) {
-          qty.value = parseInt(qty.value) - 1;
-        }
-      }
-    </script>
+    <script src="js/cart.js"></script>
+    <script src="assets/javascript/search.js"></script>
   </body>
 </html>
