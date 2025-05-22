@@ -39,7 +39,7 @@ document
     const shipping_address = `Tên: ${name} | SĐT: ${phone} | Địa chỉ: ${address}`;
 
     try {
-      const res = await fetch("http://localhost:8080/order", {
+      const res = await fetch(`${API_BASE_URL}/order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

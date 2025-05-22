@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // --- LẤY THÔNG TIN NGƯỜI DÙNG ---
   try {
-    const res = await fetch(`http://localhost:8080/user/${userId}`, {
+    const res = await fetch(`${API_BASE_URL}/user/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -53,7 +53,7 @@ document.querySelector(".infor-button").addEventListener("click", async () => {
   }
 
   try {
-    const res = await fetch(`http://localhost:8080/user/${userId}`, {
+    const res = await fetch(`${API_BASE_URL}/user/${userId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +98,7 @@ document
     }
 
     try {
-      const res = await fetch(`http://localhost:8080/user/${userId}/password`, {
+      const res = await fetch(`${API_BASE_URL}/user/${userId}/password`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

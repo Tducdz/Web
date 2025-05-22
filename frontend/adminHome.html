@@ -22,6 +22,7 @@
       src="https://kit.fontawesome.com/8373f8f77a.js"
       crossorigin="anonymous"
     ></script>
+    <script src="/js/config.js"></script>
   </head>
   <body>
     <header>
@@ -61,13 +62,16 @@
 
       <div class="content">
         <div class="basic">
-          <p>Doanh thu tháng này:</p>
-          <p>Số sản phẩm bán ra:</p>
-          <p>Số khách mua hàng:</p>
-          <p>Khách hàng có chi tiêu cao nhất:</p>
+          <p>Doanh thu tháng này: <span id="revenue">...</span></p>
+          <p>Số sản phẩm bán ra: <span id="sold">...</span></p>
+          <p>Số khách mua hàng: <span id="customers">...</span></p>
+          <p>
+            Khách hàng có chi tiêu cao nhất: <span id="topCustomer">...</span>
+          </p>
         </div>
       </div>
     </main>
     <script src="assets/javascript/hide-show.js"></script>
+    <script src="js/adminHome.js"></script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("jwt_token");
-  fetch("http://localhost:8080/order/user", {
+  fetch(`${API_BASE_URL}/order/user`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

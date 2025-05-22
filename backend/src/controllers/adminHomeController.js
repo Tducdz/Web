@@ -11,9 +11,9 @@ const getAdminSummary = (req, res) => {
     `;
 
   const soldSQL = `
-      SELECT SUM(OrdersDetails.quantity) AS productsSold
+      SELECT SUM(Orderdetails.quantity) AS productsSold
       FROM Orders
-      JOIN OrdersDetails ON Orders.id = OrdersDetails.order_id
+      JOIN Orderdetails ON Orders.id = Orderdetails.order_id
       WHERE MONTH(Orders.order_date) = ? AND YEAR(Orders.order_date) = ?
     `;
 
@@ -24,11 +24,11 @@ const getAdminSummary = (req, res) => {
     `;
 
   const topCustomerSQL = `
-      SELECT Users.name, SUM(Orders.total_price) AS totalSpent
+      SELECT Users.name, Users.phone_number, SUM(Orders.total_price) AS totalSpent
       FROM Orders
       JOIN Users ON Orders.user_id = Users.id
       WHERE MONTH(order_date) = ? AND YEAR(order_date) = ?
-      GROUP BY Users.id
+      GROUP BY Users.id, Users.name, Users.phone_number
       ORDER BY totalSpent DESC
       LIMIT 1
     `;

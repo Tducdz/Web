@@ -14,7 +14,7 @@ async function addToCart(product, quantity = 1) {
   };
 
   try {
-    const response = await fetch("http://localhost:8080/cart", {
+    const response = await fetch(`${API_BASE_URL}/cart`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function getCart(userId) {
   try {
-    const res = await fetch(`http://localhost:8080/cart/${userId}`, {
+    const res = await fetch(`${API_BASE_URL}/cart/${userId}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
       },
@@ -139,8 +139,8 @@ function addCartEvents() {
 
 async function updateCart(user_id, product_id, quantity) {
   try {
-    const res = await fetch("http://localhost:8080/cart", {
-      method: "PUT", // ← Sửa tại đây
+    const res = await fetch(`${API_BASE_URL}/cart`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,

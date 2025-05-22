@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    window.location.href = `http://localhost:8080/storange.html?keyword=${encodeURIComponent(
+    window.location.href = `${API_BASE_URL}/storange.html?keyword=${encodeURIComponent(
       keyword
     )}`;
   });

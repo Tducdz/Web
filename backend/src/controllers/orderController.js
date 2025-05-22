@@ -51,7 +51,7 @@ const createOrder = (req, res) => {
           item.price,
         ]);
         const orderDetailSQL = `
-        INSERT INTO OrdersDetails (order_id, product_id, quantity, price)
+        INSERT INTO OrderDetails (order_id, product_id, quantity, price)
         VALUES ?
       `;
 
