@@ -88,14 +88,12 @@
     <main>
       <div class="product">Đang tải...</div>
       <div class="comment">
-        <h2>Bình luận</h2>
+        <h2>Nhận xét</h2>
         <textarea
-          name=""
-          id=""
-          placeholder="Hãy viết câu hỏi của bạn về sản phẩm..."
+          id="comment-input"
+          placeholder="Hãy viết đánh giá của bạn về sản phẩm..."
         ></textarea>
-        <button onclick="">Gửi bình luận</button>
-        <!-- Bình luận -->
+        <button id="submit-comment">Gửi bình luận</button>
         <div class="comment-list"></div>
       </div>
     </main>
@@ -144,14 +142,24 @@
         </div>
       </div>
     </footer>
-    <div id="login">
+    <form id="login">
       <div class="login-form">
         <h2>Đăng nhập</h2>
-        <label for="username">Tên đăng nhập: </label>
-        <input type="text" name="" id="username" />
+        <label for="username">Email: </label>
+        <input
+          type="email"
+          name=""
+          id="username"
+          autocomplete="current-password"
+        />
 
         <label for="password">Mật khẩu: </label>
-        <input type="text" name="" id="password" />
+        <input
+          type="password"
+          name=""
+          id="password"
+          autocomplete="current-password"
+        />
 
         <label for="rewrite" class="register">Xác nhận mật khẩu: </label>
         <input type="text" class="register" name="" id="rewrite" />
@@ -166,11 +174,11 @@
         </button>
         <button type="submit" class="register">Đăng ký</button>
       </div>
-    </div>
+    </form>
     <script src="assets/javascript/login.js"></script>
     <script src="/js/fetchProducts.js"></script>
     <script src="/js/productDetail.js"></script>
-    <script src="/js/cart.js"></script>
+    <script src="/js/comment.js"></script>
     <script src="assets/javascript/search.js"></script>
   </body>
 </html>

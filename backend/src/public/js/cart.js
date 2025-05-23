@@ -1,44 +1,3 @@
-async function addToCart(product, quantity = 1) {
-  const userId = localStorage.getItem("user_id");
-  const token = localStorage.getItem("jwt_token");
-
-  if (!userId || !token) {
-    alert("Vui lòng đăng nhập để thêm vào giỏ hàng.");
-    return { success: false };
-  }
-
-  const body = {
-    user_id: userId,
-    product_id: product.id,
-    quantity: quantity,
-  };
-
-  try {
-    const response = await fetch(`${API_BASE_URL}/cart`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(body),
-    });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      alert(result.message || "Đã thêm sản phẩm vào giỏ hàng!");
-      return { success: true };
-    } else {
-      alert(result.message || "Thao tác thất bại.");
-      return { success: false };
-    }
-  } catch (err) {
-    console.error("Lỗi gọi API giỏ hàng:", err);
-    alert("Không thể kết nối đến máy chủ.");
-    return { success: false };
-  }
-}
-
 document.addEventListener("DOMContentLoaded", async () => {
   const userId = localStorage.getItem("user_id");
   if (!userId) return alert("Vui lòng đăng nhập để xem giỏ hàng.");
@@ -64,11 +23,14 @@ async function getCart(userId) {
 
 function renderCart(items) {
   const list = document.getElementById("cart-list");
+  if (!list) return;
+
   list.innerHTML = "";
 
   if (!items.length) {
     list.innerHTML = "<p>Giỏ hàng của bạn đang trống.</p>";
-    document.getElementById("totalAmount").textContent = "0";
+    const totalEl = document.getElementById("totalAmount");
+    if (totalEl) totalEl.textContent = "0";
     return;
   }
 
@@ -104,8 +66,8 @@ function renderCart(items) {
     list.insertAdjacentHTML("beforeend", html);
   });
 
-  document.getElementById("totalAmount").textContent =
-    total.toLocaleString("vi-VN");
+  const totalEl = document.getElementById("totalAmount");
+  if (totalEl) totalEl.textContent = total.toLocaleString("vi-VN");
 
   addCartEvents();
 }

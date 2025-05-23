@@ -81,6 +81,12 @@ function renderProductDetail(product) {
 function renderComments(comments = []) {
   const commentList = document.querySelector(".comment-list");
   if (!commentList) return;
+
+  if (!Array.isArray(comments)) {
+    commentList.innerHTML = "<p>Không có bình luận nào.</p>";
+    return;
+  }
+
   commentList.innerHTML = comments
     .map((c) => {
       const user = c.user_name || "Ẩn danh";
@@ -118,5 +124,46 @@ function setupActionButtons(product) {
     addToCartBtn.addEventListener("click", () => {
       addToCart(product, 1);
     });
+  }
+}
+
+async function addToCart(product, quantity = 1) {
+  const userId = localStorage.getItem("user_id");
+  const token = localStorage.getItem("jwt_token");
+
+  if (!userId || !token) {
+    alert("Vui lòng đăng nhập để thêm vào giỏ hàng.");
+    return { success: false };
+  }
+
+  const body = {
+    user_id: userId,
+    product_id: product.id,
+    quantity: quantity,
+  };
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/cart`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert(result.message || "Đã thêm sản phẩm vào giỏ hàng!");
+      return { success: true };
+    } else {
+      alert(result.message || "Thao tác thất bại.");
+      return { success: false };
+    }
+  } catch (err) {
+    console.error("Lỗi gọi API giỏ hàng:", err);
+    alert("Không thể kết nối đến máy chủ.");
+    return { success: false };
   }
 }
