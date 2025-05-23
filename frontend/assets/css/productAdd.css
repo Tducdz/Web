@@ -33,8 +33,11 @@
   border: 1px solid;
 }
 
-.content .confirm-button {
+#add-product-btn {
   cursor: pointer;
-  width: 100px;
+  position: absolute;
+  bottom: 0;
+  right: 480px;
+  width: 120px;
   height: 32px;
 }

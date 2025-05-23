@@ -59,83 +59,120 @@
           </li>
         </ul>
       </div>
-      <div class="content">
+      <form id="add-product-form" class="content">
         <div class="phone-name">
           <p>Tên sản phẩm</p>
-          <input type="text" placeholder="Nhập tên" />
+          <input
+            type="text"
+            id="product-name"
+            placeholder="Nhập tên sản phẩm"
+          />
         </div>
         <div class="phone-price">
           <p>Giá sản phẩm</p>
-          <input type="text" placeholder="Nhập giá" />
+          <input type="text" id="product-price" placeholder="Nhập giá (VND)" />
+        </div>
+        <div class="phone-price-old">
+          <p>Giá cũ</p>
+          <input type="text" id="price-old" placeholder="Nhập giá cũ (VND)" />
         </div>
         <div class="brand">
           <p>Thương hiệu</p>
-          <select style="margin-top: 8px; padding: 4px; border: 1px solid">
-            <option value="Apple">Apple</option>
-            <option value="Samsung">Samsung</option>
-            <option value="Xiaomi">Xiaomi</option>
-            <option value="Oppo">Oppo</option>
-            <option value="Realme">Realme</option>
-            <option value="Vivo">Vivo</option>
-            <option value="Sony">Sony</option>
+          <select
+            id="product-brand"
+            style="margin-top: 8px; padding: 4px; border: 1px solid"
+          >
+            <option value="1">Apple</option>
+            <option value="2">Samsung</option>
+            <option value="3">Xiaomi</option>
+            <option value="4">Oppo</option>
+            <option value="5">Realme</option>
+            <option value="6">Vivo</option>
+            <option value="7">Sony</option>
           </select>
         </div>
         <div class="size-phone">
           <p>Kích thước màn hình</p>
-          <input type="text" placeholder="Nhập kích thước" />
+          <input
+            type="text"
+            id="screen-size"
+            placeholder="Nhập kích thước (inch)"
+          />
         </div>
         <div class="technology-display">
           <p>Công nghệ màn hình</p>
-          <input type="text" placeholder="Nhập loại màn hình" />
+          <input
+            type="text"
+            id="screen-tech"
+            placeholder="Nhập loại màn hình"
+          />
         </div>
         <div class="chipset">
           <p>Chipset</p>
-          <input type="text" placeholder="Nhập chipset" />
+          <input type="text" id="chipset" placeholder="Nhập chipset" />
         </div>
         <div class="nfc">
           <p>Hỗ trợ NFC</p>
           <select
-            id="mySelect"
+            id="nfc"
             style="margin-top: 8px; padding: 4px; border: 1px solid"
           >
-            <option value="yes">Có</option>
-            <option value="no">Không</option>
+            <option value="1">Có</option>
+            <option value="0">Không</option>
           </select>
         </div>
         <div class="ram">
           <p>Dung lượng RAM</p>
-          <input type="text" placeholder="Nhập dung lượng" />
+          <input type="text" id="ram" placeholder="Nhập dung lượng (GB)" />
         </div>
         <div class="rom">
           <p>Dung lượng ROM</p>
-          <input type="text" placeholder="Nhập bộ nhớ trong" />
+          <input type="text" id="rom" placeholder="Nhập bộ nhớ trong (GB)" />
         </div>
         <div class="battery">
           <p>Dung lượng Pin</p>
-          <input type="text" placeholder="Nhập dung lượng Pin" />
+          <input
+            type="text"
+            id="battery"
+            placeholder="Nhập dung lượng Pin (mAh)"
+          />
         </div>
         <div class="sim">
           <p>Số SIM</p>
-          <input type="text" placeholder="Số SIM hỗ trợ" />
+          <input type="text" id="sim-slots" placeholder="Số SIM hỗ trợ" />
         </div>
         <div class="system">
           <p>Hệ điều hành</p>
-          <input type="text" placeholder="Nhập hệ điều hành" />
+          <input type="text" id="os" placeholder="Nhập hệ điều hành" />
         </div>
         <div class="resistant-water">
           <p>Kháng nước</p>
-          <input type="text" placeholder="Chỉ số kháng nước" />
+          <input
+            type="text"
+            id="water-resistant"
+            placeholder="Chỉ số kháng nước"
+          />
+        </div>
+        <div class="quantity">
+          <p>Số lượng</p>
+          <input type="text" id="stock" placeholder="Nhập số lượng hàng" />
         </div>
         <div class="phone-img">
           <p>Ảnh sản phẩm</p>
           <label for="fileUpload" class="custom-file-label">Chọn tệp</label>
-          <input type="file" id="fileUpload" style="display: none" />
+          <input
+            type="file"
+            id="fileUpload"
+            style="display: none"
+            accept="image/*"
+          />
           <p id="fileName"></p>
         </div>
-        <button class="confirm-button">Xác nhận</button>
-      </div>
+        <button id="add-product-btn">Thêm sản phẩm</button>
+      </form>
     </main>
     <script src="assets/javascript/hide-show.js"></script>
     <script src="assets/javascript/displayFile.js"></script>
+    <script src="js/productAdd.js"></script>
   </body>
 </html>

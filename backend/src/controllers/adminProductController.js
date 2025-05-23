@@ -142,6 +142,7 @@ const addProduct = (req, res) => {
     category_id,
     name,
     price,
+    price_old,
     screen_size,
     screen_tech,
     chipset,
@@ -155,15 +156,56 @@ const addProduct = (req, res) => {
     stock,
   } = req.body;
 
-  const imagePath = req.file ? `/img/${req.file.filename}` : null;
+  const imagePath = req.file ? `${req.file.filename}` : null;
 
   if (!imagePath) {
     return res.status(400).json({ message: "Vui lòng tải lên ảnh sản phẩm." });
   }
+  if (!name || !price || !category_id) {
+    return res
+      .status(400)
+      .json({ message: "Vui lòng cung cấp đầy đủ tên, giá, và thương hiệu." });
+  }
+
+  // Ép kiểu dữ liệu
+  const parsedData = {
+    category_id: parseInt(category_id),
+    name: name.trim(),
+    price: parseInt(price),
+    price_old: parseInt(price_old) || 0,
+    screen_size: screen_size || "",
+    screen_tech: screen_tech || "",
+    chipset: chipset || "",
+    nfc: parseInt(nfc) || 0,
+    RAM: parseInt(RAM) || 0,
+    ROM: parseInt(ROM) || 0,
+    battery: parseInt(battery) || 0,
+    sim_slots: parseInt(sim_slots) || 0,
+    os: os || "",
+    water_resistant: water_resistant || "",
+    stock: parseInt(stock) || 0,
+  };
+
+  // Kiểm tra định dạng số
+  if (
+    isNaN(parsedData.category_id) ||
+    isNaN(parsedData.price) ||
+    isNaN(parsedData.nfc) ||
+    isNaN(parsedData.RAM) ||
+    isNaN(parsedData.ROM) ||
+    isNaN(parsedData.battery) ||
+    isNaN(parsedData.sim_slots) ||
+    isNaN(parsedData.stock)
+  ) {
+    return res.status(400).json({ message: "Dữ liệu số không hợp lệ." });
+  }
 
   const checkProductSql = "SELECT * FROM Products WHERE name = ?";
-  db.query(checkProductSql, [name], (err, result) => {
-    if (err) return res.status(500).json({ message: "Lỗi kiểm tra sản phẩm." });
+  db.query(checkProductSql, [parsedData.name], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ message: "Lỗi kiểm tra sản phẩm." });
+    }
 
     if (result.length > 0) {
       return res.status(400).json({ message: "Sản phẩm đã tồn tại." });
@@ -171,36 +213,42 @@ const addProduct = (req, res) => {
 
     const sql = `
       INSERT INTO Products 
-      (category_id, name, price, screen_size, screen_tech, chipset, nfc, RAM, ROM, battery, sim_slots, os, water_resistant, image_url, stock)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      (category_id, name, price, price_old, screen_size, screen_tech, chipset, nfc, RAM, ROM, battery, sim_slots, os, water_resistant, image_url, stock)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     db.query(
       sql,
       [
-        category_id,
-        name,
-        price,
-        screen_size,
-        screen_tech,
-        chipset,
-        nfc,
-        RAM,
-        ROM,
-        battery,
-        sim_slots,
-        os,
-        water_resistant,
-        imagePath, // lưu đường dẫn
-        stock,
+        parsedData.category_id,
+        parsedData.name,
+        parsedData.price,
+        parsedData.price_old,
+        parsedData.screen_size,
+        parsedData.screen_tech,
+        parsedData.chipset,
+        parsedData.nfc,
+        parsedData.RAM,
+        parsedData.ROM,
+        parsedData.battery,
+        parsedData.sim_slots,
+        parsedData.os,
+        parsedData.water_resistant,
+        imagePath,
+        parsedData.stock,
       ],
       (err, result) => {
-        if (err) return res.status(500).json({ message: "Lỗi thêm sản phẩm." });
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ message: "Lỗi thêm sản phẩm." });
+        }
         res.status(201).json({ message: "Thêm sản phẩm thành công." });
       }
     );
   });
 };
+
+module.exports = { addProduct };
 
 const deleteProduct = (req, res) => {
   const productId = req.params.id;

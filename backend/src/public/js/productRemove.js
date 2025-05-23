@@ -230,5 +230,11 @@ document.getElementById("next-page").addEventListener("click", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  const userRole = localStorage.getItem("user_role");
+  if (userRole != "admin") {
+    alert("Không có quyền truy cập");
+    window.location.href = "index.html";
+    return;
+  }
   fetchProducts(currentPage, "");
 });
