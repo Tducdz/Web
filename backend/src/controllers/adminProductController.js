@@ -2,7 +2,7 @@ const db = require("../config/db");
 
 const getPageProducts = (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = 30;
+  const limit = 10;
   const offset = (page - 1) * limit;
 
   const sql = "SELECT * FROM Products ORDER BY id LIMIT ? OFFSET ?";
@@ -10,7 +10,16 @@ const getPageProducts = (req, res) => {
     if (err) {
       return res.status(500).json({ message: "Lỗi truy vấn sản phẩm." });
     }
-    res.status(200).json(results);
+
+    db.query("SELECT COUNT(*) AS total FROM Products", (err2, totalResult) => {
+      if (err2) {
+        return res.status(500).json({ message: "Lỗi lấy tổng số sản phẩm." });
+      }
+
+      const total = totalResult[0].total;
+      const totalPages = Math.ceil(total / limit);
+      res.status(200).json({ data: results, totalPages, page });
+    });
   });
 };
 
@@ -37,7 +46,7 @@ const searchProducts = (req, res) => {
   let { keyword = "", page = 1 } = req.query;
   keyword = keyword.trim().toLowerCase();
   page = parseInt(page);
-  const limit = 30;
+  const limit = 10;
   const offset = (page - 1) * limit;
 
   if (!keyword) {
@@ -49,16 +58,23 @@ const searchProducts = (req, res) => {
     WHERE LOWER(name) LIKE ?
     LIMIT ? OFFSET ?
   `;
-
   const values = [`%${keyword}%`, limit, offset];
 
   db.query(sql, values, (err, results) => {
     if (err) {
-      console.error("Lỗi tìm kiếm sản phẩm:", err);
       return res.status(500).json({ message: "Lỗi khi tìm kiếm sản phẩm." });
     }
 
-    res.status(200).json({ data: results, page });
+    const countSql = `SELECT COUNT(*) AS total FROM products WHERE LOWER(name) LIKE ?`;
+    db.query(countSql, [`%${keyword}%`], (err2, countResult) => {
+      if (err2) {
+        return res.status(500).json({ message: "Lỗi lấy tổng số kết quả." });
+      }
+
+      const total = countResult[0].total;
+      const totalPages = Math.ceil(total / limit);
+      res.status(200).json({ data: results, totalPages, page });
+    });
   });
 };
 
@@ -68,6 +84,7 @@ const updateProduct = (req, res) => {
     category_id,
     name,
     price,
+    price_old,
     screen_size,
     screen_tech,
     chipset,
@@ -78,63 +95,46 @@ const updateProduct = (req, res) => {
     sim_slots,
     os,
     water_resistant,
-    image_url,
     stock,
+    image_url,
   } = req.body;
 
   const sql = `
-    UPDATE Products SET
-      category_id = ?,
-      name = ?,
-      price = ?,
-      screen_size = ?,
-      screen_tech = ?,
-      chipset = ?,
-      nfc = ?,
-      RAM = ?,
-      ROM = ?,
-      battery = ?,
-      sim_slots = ?,
-      os = ?,
-      water_resistant = ?,
-      image_url = ?,
-      stock = ?
-    WHERE id = ?
-  `;
+    UPDATE Products
+    SET category_id = ?, name = ?, price = ?, price_old = ?, screen_size = ?, screen_tech = ?,
+        chipset = ?, nfc = ?, RAM = ?, ROM = ?, battery = ?, sim_slots = ?, os = ?,
+        water_resistant = ?, stock = ?, image_url = ?
+    WHERE id = ?`;
 
-  const values = [
-    category_id,
-    name,
-    price,
-    screen_size,
-    screen_tech,
-    chipset,
-    nfc,
-    RAM,
-    ROM,
-    battery,
-    sim_slots,
-    os,
-    water_resistant,
-    image_url,
-    stock,
-    productId,
-  ];
-
-  db.query(sql, values, (err, result) => {
-    if (err) {
-      console.error("Lỗi khi cập nhật sản phẩm:", err);
-      return res.status(500).json({ message: "Lỗi khi cập nhật sản phẩm." });
+  db.query(
+    sql,
+    [
+      category_id,
+      name,
+      price,
+      price_old,
+      screen_size,
+      screen_tech,
+      chipset,
+      nfc,
+      RAM,
+      ROM,
+      battery,
+      sim_slots,
+      os,
+      water_resistant,
+      stock,
+      image_url,
+      productId,
+    ],
+    (err, result) => {
+      if (err)
+        return res.status(500).json({ message: "Lỗi khi cập nhật sản phẩm" });
+      if (result.affectedRows === 0)
+        return res.status(404).json({ message: "Sản phẩm không tồn tại" });
+      res.status(200).json({ message: "Cập nhật sản phẩm thành công" });
     }
-
-    if (result.affectedRows === 0) {
-      return res
-        .status(404)
-        .json({ message: "Không tìm thấy sản phẩm để cập nhật." });
-    }
-
-    res.status(200).json({ message: "Cập nhật sản phẩm thành công." });
-  });
+  );
 };
 
 const addProduct = (req, res) => {

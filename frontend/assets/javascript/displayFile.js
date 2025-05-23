@@ -24,12 +24,8 @@ document.getElementById("fileUpload").addEventListener("change", function () {
     return;
   }
 
-  // Lấy tên file và giới hạn ký tự
+  // Lấy tên file
   let fileName = file.name;
-  let maxLength = 15;
-  if (fileName.length > maxLength) {
-    fileName = fileName.substring(0, maxLength) + "…";
-  }
 
   fileNameDisplay.textContent = fileName;
 });

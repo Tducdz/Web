@@ -61,17 +61,25 @@
       </div>
 
       <div class="content">
-        <p class="search-product-text">Tìm sản phẩm</p>
-        <input type="text" placeholder="Nhập tên sản phẩm" />
-        <button class="search-product-button">Tìm kiếm</button>
+        <form id="search-form">
+          <p class="search-product-text">Tìm sản phẩm</p>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Nhập tên sản phẩm"
+          />
+          <button class="search-product-button" id="search-btn">
+            Tìm kiếm
+          </button>
+        </form>
         <div class="table-control">
-          <div class="control-btn">
+          <div class="control-btn" id="prev-page">
             <i class="fa-solid fa-angles-left" style="color: #000000"></i>
           </div>
-          <div class="control-page">
+          <div class="control-page" id="page-info">
             <p>1</p>
           </div>
-          <div class="control-btn">
+          <div class="control-btn" id="next-page">
             <i class="fa-solid fa-angles-right" style="color: #000000"></i>
           </div>
         </div>
@@ -86,134 +94,150 @@
               <th class="col-6">Kho</th>
             </tr>
           </thead>
-          <tbody>
-            <tr id="prd-0001">
-              <td>0001</td>
-              <td>Apple</td>
-              <td>Iphone 16 Pro Max</td>
-              <td>512GB</td>
-              <td>30.990.000</td>
-              <td>2310</td>
-            </tr>
+          <tbody id="product-table-body">
+            <!-- Danh sách sp -->
           </tbody>
         </table>
       </div>
-      <div id="pop-up">
+      <div id="pop-up" style="display: none">
         <div class="product-information">
           <div class="title-content">
             <p class="edit-text">Chi tiết sản phẩm:</p>
             <i id="close-popup" class="fa-solid fa-xmark fa-2xl"></i>
           </div>
           <img
-            src="assets/img/iphone-16-pro-max.png"
+            id="product-image"
+            src=""
             style="width: 60px; margin-bottom: 4px"
-            alt=""
+            alt="Product image"
           />
           <div class="content-main">
             <div class="phone-name">
               <p>Tên sản phẩm</p>
               <input
                 type="text"
-                value="Iphone 16 Pro Max"
+                id="product-name"
                 placeholder="Nhập tên sản phẩm"
               />
             </div>
             <div class="phone-price">
               <p>Giá bán</p>
-              <input type="text" value="30.990.000" placeholder="Nhập giá" />
+              <input
+                type="text"
+                id="product-price"
+                placeholder="Nhập giá (VND)"
+              />
+            </div>
+            <div class="phone-price-old">
+              <p>Giá cũ</p>
+              <input
+                type="text"
+                id="price-old"
+                placeholder="Nhập giá cũ (VND)"
+              />
             </div>
             <div class="brand">
               <p>Thương hiệu</p>
-              <select style="margin-top: 8px; padding: 4px; border: 1px solid">
-                <option value="Apple">Apple</option>
-                <option value="Samsung">Samsung</option>
-                <option value="Xiaomi">Xiaomi</option>
-                <option value="Oppo">Oppo</option>
-                <option value="Realme">Realme</option>
-                <option value="Vivo">Vivo</option>
-                <option value="Sony">Sony</option>
+              <select
+                id="product-brand"
+                style="margin-top: 8px; padding: 4px; border: 1px solid"
+              >
+                <option value="1">Apple</option>
+                <option value="2">Samsung</option>
+                <option value="3">Xiaomi</option>
+                <option value="4">Oppo</option>
+                <option value="5">Realme</option>
+                <option value="6">Vivo</option>
+                <option value="7">Sony</option>
               </select>
             </div>
-
             <div class="size-phone">
               <p>Kích thước màn hình</p>
-              <input type="text" value="6.9" placeholder="Nhập kích thước" />
+              <input
+                type="text"
+                id="screen-size"
+                placeholder="Nhập kích thước (inch)"
+              />
             </div>
             <div class="technology-display">
               <p>Công nghệ màn hình</p>
               <input
                 type="text"
-                value="Super Retina XDR OLED"
+                id="screen-tech"
                 placeholder="Nhập loại màn hình"
               />
             </div>
             <div class="chipset">
               <p>Chipset</p>
-              <input
-                type="text"
-                value="Apple A18 Pro"
-                placeholder="Nhập chipset"
-              />
+              <input type="text" id="chipset" placeholder="Nhập chipset" />
             </div>
             <div class="nfc">
               <p>Hỗ trợ NFC</p>
-              <!-- <input type="text" value="có" placeholder="Có hỗ trợ NFC không?" /> -->
               <select
-                id="mySelect"
+                id="nfc"
                 style="margin-top: 8px; padding: 4px; border: 1px solid"
               >
-                <option value="yes">Có</option>
-                <option value="no">Không</option>
+                <option value="1">Có</option>
+                <option value="0">Không</option>
               </select>
             </div>
             <div class="ram">
               <p>Dung lượng RAM</p>
-              <input type="text" value="8" placeholder="Nhập dung lượng" />
+              <input type="text" id="ram" placeholder="Nhập dung lượng (GB)" />
             </div>
             <div class="rom">
               <p>Dung lượng ROM</p>
-              <input type="text" value="512" placeholder="Nhập bộ nhớ trong" />
+              <input
+                type="text"
+                id="rom"
+                placeholder="Nhập bộ nhớ trong (GB)"
+              />
             </div>
             <div class="battery">
               <p>Dung lượng Pin</p>
               <input
                 type="text"
-                value="4.676"
-                placeholder="Nhập dung lượng Pin"
+                id="battery"
+                placeholder="Nhập dung lượng Pin (mAh)"
               />
             </div>
             <div class="sim">
               <p>Số SIM</p>
-              <input type="text" value="2" placeholder="Số SIM hỗ trợ" />
+              <input type="text" id="sim-slots" placeholder="Số SIM hỗ trợ" />
             </div>
             <div class="system">
               <p>Hệ điều hành</p>
-              <input
-                type="text"
-                value="IOS 18"
-                placeholder="Nhập hệ điều hành"
-              />
+              <input type="text" id="os" placeholder="Nhập hệ điều hành" />
             </div>
             <div class="resistant-water">
               <p>Kháng nước</p>
-              <input type="text" value="IP68" placeholder="Chỉ số kháng nước" />
+              <input
+                type="text"
+                id="water-resistant"
+                placeholder="Chỉ số kháng nước"
+              />
             </div>
             <div class="quantity">
               <p>Số lượng</p>
-              <input
-                type="text"
-                value="2310"
-                placeholder="Nhập số lượng hàng"
-              />
+              <input type="text" id="stock" placeholder="Nhập số lượng hàng" />
             </div>
             <div class="phone-img">
               <p>Ảnh sản phẩm</p>
               <label for="fileUpload" class="custom-file-label">Chọn tệp</label>
-              <input type="file" id="fileUpload" style="display: none" />
+              <input
+                type="file"
+                id="fileUpload"
+                style="display: none"
+                accept="image/*"
+              />
               <p id="fileName"></p>
             </div>
-            <button class="edit-product">Xác nhận sửa</button>
-            <button class="delete-product">Xóa sản phẩm</button>
+            <button id="update-product-btn" class="edit-product">
+              Xác nhận sửa
+            </button>
+            <button id="delete-product-btn" class="delete-product">
+              Xóa sản phẩm
+            </button>
           </div>
         </div>
       </div>
@@ -221,5 +245,6 @@
     <script src="assets/javascript/hide-show.js"></script>
     <script src="assets/javascript/displayFile.js"></script>
     <script src="assets/javascript/product-edit.js"></script>
+    <script src="js/productRemove.js"></script>
   </body>
 </html>

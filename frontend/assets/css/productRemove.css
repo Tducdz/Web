@@ -52,10 +52,6 @@ button {
   margin-top: 12px;
 }
 
-#prd-0001 {
-  cursor: pointer;
-}
-
 .product-list td,
 .product-list th {
   padding: 10px;
@@ -92,6 +88,14 @@ button {
 
 .col-6 {
   width: 10%;
+}
+
+.edit-btn {
+  cursor: pointer;
+}
+
+.control-btn.disabled {
+  display: none;
 }
 
 /* ================ PopUp ================= */
