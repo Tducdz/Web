@@ -32,7 +32,7 @@ const createOrder = (req, res) => {
     // Create order
     const orderSQL = `
       INSERT INTO Orders (user_id, order_date, total_price, payment_method, shipping_address, payment_status, order_status)
-      VALUES (?, CURDATE(), ?, ?, ?, 'Chưa thanh toán', 'Đang xử lý')
+      VALUES (?, CURDATE(), ?, ?, ?, 'Chưa thanh toán', 'Chờ xác nhận')
     `;
 
     db.query(
@@ -82,7 +82,6 @@ const createOrder = (req, res) => {
 
           Promise.all(updateStockQueries)
             .then(() => {
-              // Delete cart
               db.query(
                 `DELETE FROM Cart WHERE user_id = ?`,
                 [user_id],

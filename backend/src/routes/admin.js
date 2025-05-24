@@ -30,7 +30,7 @@ const {
 const {
   getAllOrders,
   searchOrders,
-  updateOrderStatus,
+  updateOrder,
   deleteOrder,
 } = require("../controllers/adminOrderController");
 
@@ -59,7 +59,7 @@ router.delete("/comments/:id", deleteComment);
 
 router.get("/orders", getAllOrders);
 router.get("/orders/search", searchOrders);
-router.put("/orders/:id/status", updateOrderStatus);
+router.put("/orders/:id/status", updateOrder);
 router.delete("/orders/:id", deleteOrder);
 
 module.exports = router;

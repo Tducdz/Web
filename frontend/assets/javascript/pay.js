@@ -36,7 +36,7 @@ document
       return alert("Thiếu thông tin đơn hàng.");
     }
 
-    const shipping_address = `Tên: ${name} | SĐT: ${phone} | Địa chỉ: ${address}`;
+    const shipping_address = `${name} | ${phone} | ${address}`;
 
     try {
       const res = await fetch(`${API_BASE_URL}/order`, {

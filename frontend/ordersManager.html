@@ -62,96 +62,64 @@
       <div class="content">
         <p class="heading">Danh sách đơn hàng:</p>
         <p style="margin-top: 20px">Tìm kiếm đơn hàng:</p>
-        <input type="text" placeholder="Nhập tên khách hàng" />
-        <button class="search-button">Tìm kiếm</button>
+        <form id="searchForm">
+          <input
+            type="text"
+            id="searchName"
+            placeholder="Nhập tên khách hàng"
+          />
+          <button class="search-button" type="submit">Tìm kiếm</button>
+        </form>
         <div class="table-control">
-          <div class="control-btn">
+          <div class="control-btn" id="prevPage">
             <i class="fa-solid fa-angles-left" style="color: #000000"></i>
           </div>
           <div class="control-page">
-            <p>1</p>
+            <p id="currentPage">1</p>
           </div>
-          <div class="control-btn">
+          <div class="control-btn" id="nextPage">
             <i class="fa-solid fa-angles-right" style="color: #000000"></i>
           </div>
         </div>
         <table>
           <thead>
             <tr>
-              <th>Mã Đơn</th>
+              <th>ID</th>
               <th>Ngày Đặt</th>
               <th>Khách Hàng</th>
-              <th>Sản Phẩm</th>
               <th>Tổng Tiền</th>
-              <th>Trạng Thái</th>
+              <th>Phương thức</th>
+              <th>Thanh toán</th>
+              <th>Trạng Thái đơn</th>
+              <th>Giao hàng</th>
               <th>Hành Động</th>
             </tr>
           </thead>
-          <tbody id="orderTable">
-            <tr>
-              <td>0001</td>
-              <td>22/03/2025</td>
-              <td>Nguyễn Văn A</td>
-              <td>iPhone 15 Pro Max</td>
-              <td>32.000.000</td>
-              <td>Chờ xác nhận</td>
-              <td>
-                <button
-                  class="btn edit-btn"
-                  style="background-color: #4caf50; border: none"
-                >
-                  Sửa
-                </button>
-                <button
-                  class="btn delete-btn"
-                  style="background-color: #f44336; border: none"
-                >
-                  Xóa
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>0002</td>
-              <td>23/03/2025</td>
-              <td>Trần Thị B</td>
-              <td>Samsung Galaxy S24 Ultra</td>
-              <td>29.000.000</td>
-              <td>Đang giao</td>
-              <td>
-                <button
-                  class="btn edit-btn"
-                  style="background-color: #4caf50; border: none"
-                >
-                  Sửa
-                </button>
-                <button
-                  class="btn delete-btn"
-                  style="background-color: #f44336; border: none"
-                >
-                  Xóa
-                </button>
-              </td>
-            </tr>
-          </tbody>
+          <tbody id="orderTableBody"></tbody>
         </table>
       </div>
       <div id="editModal" class="popup">
         <div class="popup-content">
-          <h3 style="font-size: 16px">Chỉnh Sửa Đơn Hàng</h3>
-          <label>Tên khách hàng:</label>
-          <input type="text" id="editCustomer" placeholder="Tên khách hàng" />
-
-          <label>Sản phẩm</label>
-          <input type="text" id="editProduct" placeholder="Sản phẩm" />
-
-          <label>Tổng tiền</label>
-          <input type="text" id="editTotal" placeholder="Tổng tiền" />
-
-          <label>Trạng thái</label>
+          <h3 style="font-size: 20px; margin-bottom: 8px">
+            Chỉnh Sửa Đơn Hàng
+          </h3>
+          <label>Thông tin giao hàng:</label>
+          <input
+            type="text"
+            id="editAddress"
+            placeholder="Tên - SĐT - Địa chỉ"
+          />
+          <label>Trạng thái thanh toán:</label>
+          <select id="editPaymentStatus">
+            <option value="Chưa thanh toán">Chưa thanh toán</option>
+            <option value="Đã thanh toán">Đã thanh toán</option>
+          </select>
+          <label>Trạng thái đơn hàng:</label>
           <select id="editStatus">
             <option value="Chờ xác nhận">Chờ xác nhận</option>
             <option value="Đang giao">Đang giao</option>
             <option value="Đã hoàn thành">Đã hoàn thành</option>
+            <option value="Đã hủy">Đã hủy</option>
           </select>
           <button id="saveEdit">Lưu</button>
           <button id="closeEdit">Hủy</button>

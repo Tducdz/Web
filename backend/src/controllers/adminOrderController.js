@@ -2,34 +2,62 @@ const db = require("../config/db");
 
 const getAllOrders = (req, res) => {
   let { page = 1, limit = 10 } = req.query;
+  page = parseInt(page);
+  limit = parseInt(limit);
   let offset = (page - 1) * limit;
 
-  const query = `
+  const countQuery = `SELECT COUNT(*) as total FROM Orders`;
+  db.query(countQuery, (err, countResult) => {
+    if (err) {
+      console.error("Lỗi đếm tổng số đơn hàng:", err);
+      return res.status(500).json({ error: "Lỗi server" });
+    }
+
+    const totalOrders = countResult[0].total;
+
+    const query = `
       SELECT o.id, o.user_id, u.name AS name, o.order_date, o.total_price,
-             o.payment_method, o.payment_status, o.order_status
+             o.payment_method, o.payment_status, o.order_status, o.shipping_address
       FROM Orders o
       JOIN Users u ON o.user_id = u.id
       ORDER BY o.order_date DESC
       LIMIT ? OFFSET ?
     `;
 
-  db.query(query, [parseInt(limit), parseInt(offset)], (err, results) => {
-    if (err) {
-      console.error("Lỗi lấy danh sách đơn hàng:", err);
-      return res.status(500).json({ error: "Lỗi server" });
-    }
+    db.query(query, [limit, offset], (err, results) => {
+      if (err) {
+        console.error("Lỗi lấy danh sách đơn hàng:", err);
+        return res.status(500).json({ error: "Lỗi server" });
+      }
 
-    res.json({ page, limit, orders: results });
+      res.json({ page, limit, totalOrders, orders: results });
+    });
   });
 };
 
 const searchOrders = (req, res) => {
   const { name, page = 1, limit = 10 } = req.query;
+  page = parseInt(page);
+  limit = parseInt(limit);
   let offset = (page - 1) * limit;
 
-  const query = `
+  const countQuery = `
+    SELECT COUNT(*) as total 
+    FROM Orders o
+    JOIN Users u ON o.user_id = u.id
+    WHERE u.name LIKE ?
+  `;
+  db.query(countQuery, [`%${name}%`], (err, countResult) => {
+    if (err) {
+      console.error("Lỗi đếm tổng số đơn hàng:", err);
+      return res.status(500).json({ error: "Lỗi server" });
+    }
+
+    const totalOrders = countResult[0].total;
+
+    const query = `
       SELECT o.id, o.user_id, u.name AS name, o.order_date, o.total_price,
-             o.payment_method, o.payment_status, o.order_status
+             o.payment_method, o.payment_status, o.order_status, o.shipping_address
       FROM Orders o
       JOIN Users u ON o.user_id = u.id
       WHERE u.name LIKE ?
@@ -37,33 +65,30 @@ const searchOrders = (req, res) => {
       LIMIT ? OFFSET ?
     `;
 
-  db.query(
-    query,
-    [`%${name}%`, parseInt(limit), parseInt(offset)],
-    (err, results) => {
+    db.query(query, [`%${name}%`, limit, offset], (err, results) => {
       if (err) {
         console.error("Lỗi tìm đơn hàng:", err);
         return res.status(500).json({ error: "Lỗi server" });
       }
 
-      res.json({
-        page,
-        limit,
-        orders: results,
-      });
-    }
-  );
+      res.json({ page, limit, totalOrders, orders: results });
+    });
+  });
 };
 
-const updateOrderStatus = (req, res) => {
+const updateOrder = (req, res) => {
   const { id } = req.params;
-  const { status } = req.body;
+  const { address, status, payment_status } = req.body;
 
-  const query = `UPDATE Orders SET order_status = ? WHERE id = ?`;
+  const query = `
+    UPDATE Orders 
+    SET order_status = ?, shipping_address = ?, payment_status = ? 
+    WHERE id = ?
+  `;
 
-  db.query(query, [status, id], (err, result) => {
+  db.query(query, [status, address, payment_status, id], (err, result) => {
     if (err) {
-      console.error("Lỗi cập nhật trạng thái:", err);
+      console.error("Lỗi cập nhật đơn hàng:", err);
       return res.status(500).json({ error: "Lỗi server" });
     }
 
@@ -71,14 +96,13 @@ const updateOrderStatus = (req, res) => {
       return res.status(404).json({ error: "Không tìm thấy đơn hàng" });
     }
 
-    res.json({ message: "Cập nhật trạng thái thành công" });
+    res.json({ message: "Cập nhật đơn hàng thành công" });
   });
 };
 
 const deleteOrder = (req, res) => {
   const { id } = req.params;
 
-  // delete orders_detail
   const deleteDetailsQuery = `DELETE FROM OrderDetails WHERE order_id = ?`;
   db.query(deleteDetailsQuery, [id], (err, result) => {
     if (err) {
@@ -86,7 +110,6 @@ const deleteOrder = (req, res) => {
       return res.status(500).json({ error: "Lỗi khi xóa chi tiết đơn hàng" });
     }
 
-    // delete order
     const deleteOrderQuery = `DELETE FROM Orders WHERE id = ?`;
     db.query(deleteOrderQuery, [id], (err2, result2) => {
       if (err2) {
@@ -103,4 +126,9 @@ const deleteOrder = (req, res) => {
   });
 };
 
-module.exports = { getAllOrders, searchOrders, updateOrderStatus, deleteOrder };
+module.exports = {
+  getAllOrders,
+  searchOrders,
+  updateOrder,
+  deleteOrder,
+};
