@@ -2,59 +2,109 @@ const db = require("../config/db");
 
 const getComments = (req, res) => {
   let page = parseInt(req.query.page) || 1;
-  let limit = parseInt(req.query.limit) || 20;
+  let limit = parseInt(req.query.limit) || 10;
   let offset = (page - 1) * limit;
 
-  const query = `
-        SELECT c.id, c.user_id, c.product_id, c.comment, c.created_at, c.censor
-        FROM Comments c
-        ORDER BY c.created_at DESC
-        LIMIT ? OFFSET ?
-    `;
+  const countQuery = `
+    SELECT COUNT(*) AS total
+    FROM Comments c
+    JOIN Products p ON c.product_id = p.id
+    JOIN Users u ON c.user_id = u.id
+  `;
 
-  db.query(query, [limit, offset], (err, results) => {
+  db.query(countQuery, (err, countResults) => {
     if (err) {
-      console.error("Lỗi lấy bình luận:", err);
+      console.error("Lỗi lấy tổng số bình luận:", err);
       return res.status(500).send("Có lỗi xảy ra!");
     }
 
-    res.json({
-      page: page,
-      limit: limit,
-      comments: results,
+    const totalCount = countResults[0].total;
+    const totalPages = Math.ceil(totalCount / limit);
+
+    const query = `
+      SELECT 
+        c.id, 
+        c.comment, 
+        c.create_at, 
+        c.censor,
+        p.name AS product_name,
+        u.name AS user_name
+      FROM Comments c
+      JOIN Products p ON c.product_id = p.id
+      JOIN Users u ON c.user_id = u.id
+      ORDER BY c.create_at DESC
+      LIMIT ? OFFSET ?
+    `;
+
+    db.query(query, [limit, offset], (err, results) => {
+      if (err) {
+        console.error("Lỗi lấy bình luận:", err);
+        return res.status(500).send("Có lỗi xảy ra!");
+      }
+
+      res.json({
+        page: page,
+        totalPages: totalPages,
+        comments: results,
+      });
     });
   });
 };
 
 const getCommentsByProductName = (req, res) => {
   let { page = 1, limit = 10, keyword } = req.query;
+  page = parseInt(page);
+  limit = parseInt(limit);
   let offset = (page - 1) * limit;
 
-  if (!keyword) {
-    return res.status(400).json({ error: "Vui lòng nhập tên sản phảm" });
+  if (!keyword || keyword.trim() === "") {
+    return res.status(400).json({ error: "Vui lòng nhập tên sản phẩm" });
   }
 
-  let query = `
-        SELECT c.id, c.user_id, c.product_id, c.comment, c.censor, c.created_at
-        FROM Comments c
-        JOIN Products p ON c.product_id = p.id
-        WHERE p.name LIKE ?
-        ORDER BY c.created_at DESC
-        LIMIT ? OFFSET ?
-    `;
+  const countQuery = `
+    SELECT COUNT(*) AS total
+    FROM Comments c
+    JOIN Products p ON c.product_id = p.id
+    JOIN Users u ON c.user_id = u.id
+    WHERE p.name LIKE ?
+  `;
 
-  let queryParams = [`%${keyword}%`, parseInt(limit), offset];
-
-  db.query(query, queryParams, (err, results) => {
+  db.query(countQuery, [`%${keyword}%`], (err, countResults) => {
     if (err) {
-      console.error("Lỗi tìm kiếm bình luận:", err);
+      console.error("Lỗi đếm bình luận:", err);
       return res.status(500).send("Có lỗi xảy ra!");
     }
 
-    res.json({
-      page: page,
-      limit: limit,
-      comments: results,
+    const totalCount = countResults[0].total;
+    const totalPages = Math.ceil(totalCount / limit);
+
+    const query = `
+      SELECT 
+        c.id, 
+        c.comment, 
+        c.censor, 
+        c.create_at,
+        p.name AS product_name,
+        u.name AS user_name
+      FROM Comments c
+      JOIN Products p ON c.product_id = p.id
+      JOIN Users u ON c.user_id = u.id
+      WHERE p.name LIKE ?
+      ORDER BY c.create_at DESC
+      LIMIT ? OFFSET ?
+    `;
+
+    db.query(query, [`%${keyword}%`, limit, offset], (err, results) => {
+      if (err) {
+        console.error("Lỗi tìm kiếm bình luận:", err);
+        return res.status(500).send("Có lỗi xảy ra!");
+      }
+
+      res.json({
+        page: page,
+        totalPages: totalPages,
+        comments: results,
+      });
     });
   });
 };

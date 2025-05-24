@@ -2,10 +2,18 @@ const express = require("express");
 const path = require("path");
 require("dotenv").config();
 const { verifyToken, verifyAdmin } = require("./middleware/auth");
+const cors = require("cors");
 
 const app = express();
 const port = process.env.PORT || 8080;
 const hostname = process.env.HOST_NAME;
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 // config req.body
 app.use(express.json());
@@ -40,6 +48,6 @@ const connectPort = require("./config/port");
 app.get("/js/config.js", connectPort);
 
 // test connection
-app.listen(port, hostname, () => {
-  console.log(`Example app listening on port ${port}`);
+app.listen(8080, "0.0.0.0", () => {
+  console.log("Server running");
 });

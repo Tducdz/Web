@@ -65,13 +65,13 @@
         <input type="text" placeholder="Nhập tên sản phẩm" />
         <button class="search-button">Tìm kiếm</button>
         <div class="table-control">
-          <div class="control-btn">
+          <div class="control-btn" id="prevPage">
             <i class="fa-solid fa-angles-left" style="color: #000000"></i>
           </div>
           <div class="control-page">
-            <p>1</p>
+            <p id="currentPage">1</p>
           </div>
-          <div class="control-btn">
+          <div class="control-btn" id="nextPage">
             <i class="fa-solid fa-angles-right" style="color: #000000"></i>
           </div>
         </div>
@@ -87,46 +87,7 @@
               <th>Hành Động</th>
             </tr>
           </thead>
-          <tbody id="commentTable">
-            <tr>
-              <td>0001</td>
-              <td>22/03/2025</td>
-              <td>Nguyễn Văn A</td>
-              <td>iPhone 15 Pro Max</td>
-              <td>Sản phẩm rất tốt!</td>
-              <td>Chờ duyệt</td>
-              <td>
-                <button
-                  class="btn approve-btn"
-                  style="background-color: #4caf50; border: none"
-                >
-                  Duyệt
-                </button>
-                <button
-                  class="btn delete-btn"
-                  style="background-color: #f44336; border: none"
-                >
-                  Xóa
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>0002</td>
-              <td>23/03/2025</td>
-              <td>Trần Thị B</td>
-              <td>Samsung Galaxy S24 Ultra</td>
-              <td>Giao hàng nhanh, chất lượng ok</td>
-              <td>Đã duyệt</td>
-              <td>
-                <button
-                  class="btn delete-btn"
-                  style="background-color: #f44336; border: none"
-                >
-                  Xóa
-                </button>
-              </td>
-            </tr>
-          </tbody>
+          <tbody id="commentTable"></tbody>
         </table>
       </div>
     </main>

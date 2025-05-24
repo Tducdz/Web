@@ -8,7 +8,7 @@ document
   .addEventListener("click", async () => {
     if (!token) {
       alert("Vui lòng đăng nhập để gửi đánh giá!");
-      window.location.href = "/login";
+      window.location.reload();
       return;
     }
 
