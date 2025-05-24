@@ -54,8 +54,8 @@
           <li class="nav-list">
             <a href="commentsManager.html">Quản lý bình luận</a>
           </li>
-          <li class="nav-list">
-            <a href="index.html">Đăng xuất</a>
+          <li class="nav-list" id="logout">
+            <a href="#">Đăng xuất</a>
           </li>
         </ul>
       </div>
@@ -129,5 +129,13 @@
     </main>
     <script src="assets/javascript/hide-show.js"></script>
     <script src="assets/javascript/user-table.js"></script>
+    <script>
+      const logoutBtn = document.getElementById("logout");
+      logoutBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        localStorage.clear();
+        window.location.href = "index.html";
+      });
+    </script>
   </body>
 </html>
