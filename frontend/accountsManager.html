@@ -61,9 +61,15 @@
       </div>
       <div class="content">
         <h3>Danh sách tài khoản:</h3>
-        <p class="search-account-text">Tìm tài khoản</p>
-        <input type="text" placeholder="Nhập tên tài khoản" />
-        <button class="search-account-button">Tìm kiếm</button>
+        <div>
+          <label class="search-account-text" for="searchInput"
+            >Tìm tài khoản:</label
+          >
+          <input type="text" id="searchInput" placeholder="Tìm kiếm" />
+          <button class="search-account-button" id="searchButton">
+            Tìm kiếm
+          </button>
+        </div>
         <div class="table-control">
           <div class="control-btn">
             <i class="fa-solid fa-angles-left" style="color: #000000"></i>
@@ -81,40 +87,44 @@
               <th>ID</th>
               <th>Tên tài khoản</th>
               <th>Email</th>
+              <th>Số điện thoại</th>
+              <th>Địa chỉ</th>
               <th>Vai trò</th>
               <th>Trạng thái</th>
               <th>Hành động</th>
             </tr>
           </thead>
-          <tbody>
-            <!-- Dữ liệu thêm bằng JS -->
-          </tbody>
+          <tbody></tbody>
         </table>
       </div>
       <div id="editPopup" class="popup">
-        <div class="popup-content">
-          <h3 style="font-size: 16px">Chỉnh sửa tài khoản</h3>
+        <form class="popup-content">
+          <h3>Chỉnh sửa tài khoản</h3>
           <label>Tên tài khoản:</label>
-          <input type="text" id="editName" maxlength="25" />
-
+          <input type="text" id="editName" required />
           <label>Email:</label>
-          <input type="email" id="editEmail" maxlength="40" />
-
+          <input type="email" id="editEmail" required />
+          <label>Mật khẩu (để trống nếu không đổi):</label>
+          <input type="password" id="editPassword" autocomplete="off" />
+          <label>Số điện thoại:</label>
+          <input
+            type="text"
+            id="editPhoneNumber"
+            pattern="0\d{9,10}"
+            title="Số
+          điện thoại phải bắt đầu bằng 0 và có 10-11 chữ số"
+            required
+          />
+          <label>Địa chỉ:</label>
+          <input type="text" id="editAddress" required />
           <label>Vai trò:</label>
           <select id="editRole">
-            <option value="Admin">Admin</option>
-            <option value="User">User</option>
+            <option value="admin">admin</option>
+            <option value="user">user</option>
           </select>
-
-          <label>Trạng thái:</label>
-          <select id="editStatus">
-            <option value="Hoạt động">Hoạt động</option>
-            <option value="Bị khóa">Bị khóa</option>
-          </select>
-
-          <button onclick="saveChanges()">Lưu</button>
-          <button onclick="closePopup()">Đóng</button>
-        </div>
+          <button type="button" id="saveChanges">Lưu</button>
+          <button type="button" id="closePopup">Đóng</button>
+        </form>
       </div>
     </main>
     <script src="assets/javascript/hide-show.js"></script>

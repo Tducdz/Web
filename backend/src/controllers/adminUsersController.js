@@ -1,13 +1,12 @@
 const db = require("../config/db");
-const { get } = require("../routes/auth");
 
 const getUsers = (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = 30;
+  const limit = 10;
   const offset = (page - 1) * limit;
 
   const sql =
-    "SELECT id, name, email, phone_number, address, role FROM Users LIMIT ? OFFSET ?";
+    "SELECT id, name, email, phone_number, address, role, password FROM Users LIMIT ? OFFSET ?";
   db.query(sql, [limit, offset], (err, result) => {
     if (err)
       return res.status(500).json({ message: "Lỗi lấy danh sách tài khoản." });
@@ -19,7 +18,7 @@ const searchUsers = (req, res) => {
   let { keyword = "", page = 1 } = req.query;
   keyword = keyword.trim().toLowerCase();
   page = parseInt(page);
-  const limit = 30;
+  const limit = 10;
   const offset = (page - 1) * limit;
 
   if (!keyword) {
@@ -27,7 +26,7 @@ const searchUsers = (req, res) => {
   }
 
   const sql = `
-      SELECT id, name, email, phone_number, address, role
+      SELECT id, name, email, phone_number, address, role, password
       FROM Users
       WHERE LOWER(name) LIKE ?
       LIMIT ? OFFSET ?
@@ -37,7 +36,6 @@ const searchUsers = (req, res) => {
 
   db.query(sql, values, (err, results) => {
     if (err) {
-      console.error("Lỗi tìm kiếm tài khoản:", err);
       return res.status(500).json({ message: "Lỗi tìm kiếm tài khoản." });
     }
 
@@ -49,7 +47,7 @@ const getUserById = (req, res) => {
   const userId = req.params.id;
 
   const sql = `
-      SELECT id, name, email, phone_number, address, role
+      SELECT id, name, email, phone_number, address, role, password
       FROM Users
       WHERE id = ?
     `;
@@ -70,23 +68,50 @@ const getUserById = (req, res) => {
 
 const updateUser = (req, res) => {
   const userId = req.params.id;
-  const { name, email, phone_number, address, role } = req.body;
+  const { name, email, phone_number, address, role, password } = req.body;
 
-  const sql = `
-      UPDATE Users
-      SET name = ?, email = ?, phone_number = ?, address = ?, role = ?
-      WHERE id = ?
-    `;
+  if (!name || !email || !role) {
+    return res
+      .status(400)
+      .json({ message: "Tên, email và vai trò là bắt buộc." });
+  }
 
-  db.query(
-    sql,
-    [name, email, phone_number, address, role, userId],
-    (err, result) => {
-      if (err)
-        return res.status(500).json({ message: "Lỗi cập nhật tài khoản." });
-      res.json({ message: "Cập nhật tài khoản thành công." });
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ message: "Email không hợp lệ." });
+  }
+
+  if (!["admin", "user"].includes(role)) {
+    return res.status(400).json({ message: "Vai trò không hợp lệ." });
+  }
+
+  if (phone_number && !/^\d{9,10}$/.test(phone_number)) {
+    return res.status(400).json({ message: "Số điện thoại không hợp lệ." });
+  }
+
+  let sql = `
+    UPDATE Users
+    SET name = ?, email = ?, phone_number = ?, address = ?, role = ?
+  `;
+  const values = [name, email, phone_number || null, address || null, role];
+
+  if (password) {
+    sql += `, password = ?`;
+    values.push(password);
+  }
+
+  sql += ` WHERE id = ?`;
+  values.push(userId);
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      return res.status(500).json({ message: "Lỗi cập nhật tài khoản." });
     }
-  );
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Không tìm thấy tài khoản." });
+    }
+    res.json({ message: "Cập nhật tài khoản thành công." });
+  });
 };
 
 const deleteUser = (req, res) => {
@@ -101,7 +126,6 @@ const deleteUser = (req, res) => {
 const disablePassword = (req, res) => {
   const userId = req.params.id;
 
-  // Password = null
   const sql = `UPDATE Users SET password = NULL WHERE id = ?`;
 
   db.query(sql, [userId], (err, result) => {
@@ -120,7 +144,6 @@ const disablePassword = (req, res) => {
 const enablePassword = (req, res) => {
   const userId = req.params.id;
 
-  // Password = 123456
   const sql = `UPDATE Users SET password = '123456' WHERE id = ?`;
 
   db.query(sql, [userId], (err, result) => {
