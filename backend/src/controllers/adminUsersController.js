@@ -89,75 +89,122 @@ const updateUser = (req, res) => {
     return res.status(400).json({ message: "Số điện thoại không hợp lệ." });
   }
 
-  let sql = `
-    UPDATE Users
-    SET name = ?, email = ?, phone_number = ?, address = ?, role = ?
-  `;
-  const values = [name, email, phone_number || null, address || null, role];
-
-  if (password) {
-    sql += `, password = ?`;
-    values.push(password);
-  }
-
-  sql += ` WHERE id = ?`;
-  values.push(userId);
-
-  db.query(sql, values, (err, result) => {
+  // Kiểm tra xem tài khoản cần cập nhật có phải admin không
+  const checkAdminSql = `SELECT role FROM Users WHERE id = ?`;
+  db.query(checkAdminSql, [userId], (err, results) => {
     if (err) {
-      return res.status(500).json({ message: "Lỗi cập nhật tài khoản." });
+      return res.status(500).json({ message: "Lỗi kiểm tra tài khoản." });
     }
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ message: "Không tìm thấy tài khoản." });
+    if (results.length > 0 && results[0].role === "admin") {
+      return res
+        .status(403)
+        .json({ message: "Không thể cập nhật tài khoản admin." });
     }
-    res.json({ message: "Cập nhật tài khoản thành công." });
+
+    let sql = `
+      UPDATE Users
+      SET name = ?, email = ?, phone_number = ?, address = ?, role = ?
+    `;
+    const values = [name, email, phone_number || null, address || null, role];
+
+    if (password) {
+      sql += `, password = ?`;
+      values.push(password);
+    }
+
+    sql += ` WHERE id = ?`;
+    values.push(userId);
+
+    db.query(sql, values, (err, result) => {
+      if (err) {
+        return res.status(500).json({ message: "Lỗi cập nhật tài khoản." });
+      }
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Không tìm thấy tài khoản." });
+      }
+      res.json({ message: "Cập nhật tài khoản thành công." });
+    });
   });
 };
 
 const deleteUser = (req, res) => {
   const userId = req.params.id;
-  const sql = "DELETE FROM Users WHERE id = ?";
-  db.query(sql, [userId], (err) => {
-    if (err) return res.status(500).json({ message: "Lỗi xóa tài khoản." });
-    res.json({ message: "Xóa tài khoản thành công." });
+
+  // Kiểm tra xem tài khoản có phải admin không
+  const checkAdminSql = `SELECT role FROM Users WHERE id = ?`;
+  db.query(checkAdminSql, [userId], (err, results) => {
+    if (err) {
+      return res.status(500).json({ message: "Lỗi kiểm tra tài khoản." });
+    }
+    if (results.length > 0 && results[0].role === "admin") {
+      return res
+        .status(403)
+        .json({ message: "Không thể xóa tài khoản admin." });
+    }
+
+    const sql = "DELETE FROM Users WHERE id = ?";
+    db.query(sql, [userId], (err) => {
+      if (err) return res.status(500).json({ message: "Lỗi xóa tài khoản." });
+      res.json({ message: "Xóa tài khoản thành công." });
+    });
   });
 };
 
 const disablePassword = (req, res) => {
   const userId = req.params.id;
 
-  const sql = `UPDATE Users SET password = NULL WHERE id = ?`;
-
-  db.query(sql, [userId], (err, result) => {
+  // Kiểm tra xem tài khoản có phải admin không
+  const checkAdminSql = `SELECT role FROM Users WHERE id = ?`;
+  db.query(checkAdminSql, [userId], (err, results) => {
     if (err) {
-      return res.status(500).json({ message: "Lỗi khi khóa tài khoản." });
+      return res.status(500).json({ message: "Lỗi kiểm tra tài khoản." });
+    }
+    if (results.length > 0 && results[0].role === "admin") {
+      return res
+        .status(403)
+        .json({ message: "Không thể khóa tài khoản admin." });
     }
 
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ message: "Không tìm thấy tài khoản." });
-    }
-
-    res.status(200).json({ message: "Tài khoản đã bị khóa." });
+    const sql = `UPDATE Users SET password = NULL WHERE id = ?`;
+    db.query(sql, [userId], (err, result) => {
+      if (err) {
+        return res.status(500).json({ message: "Lỗi khi khóa tài khoản." });
+      }
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Không tìm thấy tài khoản." });
+      }
+      res.status(200).json({ message: "Tài khoản đã bị khóa." });
+    });
   });
 };
 
 const enablePassword = (req, res) => {
   const userId = req.params.id;
 
-  const sql = `UPDATE Users SET password = '123456' WHERE id = ?`;
-
-  db.query(sql, [userId], (err, result) => {
+  // Kiểm tra xem tài khoản có phải admin không
+  const checkAdminSql = `SELECT role FROM Users WHERE id = ?`;
+  db.query(checkAdminSql, [userId], (err, results) => {
     if (err) {
-      return res.status(500).json({ message: "Lỗi khi mở khóa tài khoản." });
+      return res.status(500).json({ message: "Lỗi kiểm tra tài khoản." });
+    }
+    if (results.length > 0 && results[0].role === "admin") {
+      return res
+        .status(403)
+        .json({ message: "Không thể mở khóa tài khoản admin." });
     }
 
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ message: "Không tìm thấy tài khoản." });
-    }
-
-    res
-      .status(200)
-      .json({ message: "Tài khoản đã được mở khóa (password = 123456)." });
+    const sql = `UPDATE Users SET password = '123456' WHERE id = ?`;
+    db.query(sql, [userId], (err, result) => {
+      if (err) {
+        return res.status(500).json({ message: "Lỗi khi mở khóa tài khoản." });
+      }
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Không tìm thấy tài khoản." });
+      }
+      res
+        .status(200)
+        .json({ message: "Tài khoản đã được mở khóa (password = 123456)." });
+    });
   });
 };
 

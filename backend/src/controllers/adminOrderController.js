@@ -37,8 +37,6 @@ const getAllOrders = (req, res) => {
 
 const searchOrders = (req, res) => {
   const { name, page = 1, limit = 10 } = req.query;
-  page = parseInt(page);
-  limit = parseInt(limit);
   let offset = (page - 1) * limit;
 
   const countQuery = `
