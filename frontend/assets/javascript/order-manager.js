@@ -63,9 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function fetchOrders(page = 1, limit = 10, search = "") {
     const url = search
-      ? `${API_BASE_URL}/admin/orders/search?name=${encodeURIComponent(
-          search
-        )}&page=${page}&limit=${limit}`
+      ? `${API_BASE_URL}/admin/orders/search?name=${search}` //&page=${page}&limit=${limit}
       : `${API_BASE_URL}/admin/orders?page=${page}&limit=${limit}`;
 
     fetch(url, {
